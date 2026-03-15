@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="A Michelin-starred culinary experience. Unforgettable fine dining, exquisite ingredients, and timeless luxury.">
+    <meta property="og:title" content="AURELIA | Fine Dining">
+    <meta property="og:description" content="Experience high-end European fine dining in an intimate, timeless setting.">
+    <meta property="og:type" content="website">
+    <title>AURELIA | Fine Dining & Luxury Hospitality</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🍽️</text></svg>">
+</head>
+
+<!-- FIX 1: body was self-closed; everything below was orphaned outside <body> -->
+<body class="loading">
+    <div class="ambient-background"></div>
+    <div class="cursor-dot"></div>
+    <div class="cursor-outline"></div>
+
+    <div id="loader">
+        <h1 class="loader-logo">AURELIA</h1>
+        <div class="loader-line"></div>
+    </div>
+
+    <nav id="navbar">
+        <div class="nav-container">
+            <a href="#home" class="nav-logo route-link">AURELIA</a>
+            <div class="nav-links">
+                <a href="#home" class="route-link active">Home</a>
+                <a href="#menu" class="route-link">Menu</a>
+                <a href="#sensory" class="route-link">The Canvas</a>
+                <a href="#about" class="route-link">About</a>
+                <a href="#gallery" class="route-link">Gallery</a>
+                <a href="#contact" class="route-link">Contact</a>
+            </div>
+            <a href="#reservations" class="btn-primary nav-cta route-link">Reserve a Table</a>
+            <div class="menu-toggle">
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <main id="app-root">
+
+        <section id="home" class="page-view active">
+            <header class="hero">
+                <div class="hero-bg">
+                    <img src="https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?q=80&w=2070&auto=format&fit=crop" alt="Luxurious Restaurant Interior" loading="lazy">
+                </div>
+                <div class="hero-content reveal-on-scroll">
+                    <span class="subtitle">A Michelin-Starred Experience</span>
+                    <h1 class="title glow-text">Culinary Artistry,<br>Refined.</h1>
+                    <div class="hero-actions">
+                        <a href="#reservations" class="btn-primary route-link">Reserve a Table</a>
+                        <a href="#menu" class="btn-secondary route-link">Discover Menu</a>
+                    </div>
+                </div>
+                <div class="scroll-indicator">
+                    <span>Explore</span>
+                    <div class="line"></div>
+                </div>
+            </header>
+
+            <section class="section-padding about-preview">
+                <div class="container grid-2">
+                    <div class="editorial-text reveal-on-scroll">
+                        <h2 class="section-title">A Symphony of Taste</h2>
+                        <p>At Aurelia, we blur the line between gastronomy and art. Every dish is a meticulously crafted narrative, honoring seasonal ingredients sourced from boutique European farms. Step into an atmosphere of timeless luxury, where unparalleled service meets visionary cuisine.</p>
+                        <a href="#about" class="link-arrow route-link">Our Philosophy &rarr;</a>
+                    </div>
+                    <div class="editorial-image reveal-on-scroll delay-1 relative-glow">
+                        <img src="https://images.unsplash.com/photo-1550966871-3ed3cdb5ed0c?q=80&w=2070&auto=format&fit=crop" alt="Plated Dish" loading="lazy">
+                    </div>
+                </div>
+            </section>
+
+            <section class="section-padding glass-panel signature-dishes">
+                <div class="container">
+                    <div class="section-header center reveal-on-scroll">
+                        <span class="subtitle">The Classics</span>
+                        <h2 class="section-title">Signature Creations</h2>
+                    </div>
+                    <div class="grid-3">
+                        <div class="card reveal-on-scroll delay-1">
+                            <div class="card-img">
+                                <img src="https://images.unsplash.com/photo-1600891964092-4316c288032e?q=80&w=1740&auto=format&fit=crop" alt="Wagyu Beef" loading="lazy">
+                            </div>
+                            <div class="card-content">
+                                <h3>A5 Wagyu & Truffle</h3>
+                                <p>Smoked celeriac puree, black winter truffle, bordelaise reduction.</p>
+                            </div>
+                        </div>
+                        <div class="card reveal-on-scroll delay-2">
+                            <div class="card-img">
+                                <img src="https://images.unsplash.com/photo-1515516969-d4008cc6241a?q=80&w=1587&auto=format&fit=crop" alt="Scallop Crudo" loading="lazy">
+                            </div>
+                            <div class="card-content">
+                                <h3>Hokkaido Scallop Crudo</h3>
+                                <p>Citrus caviar, fermented chili, compressed cucumber, dashi snow.</p>
+                            </div>
+                        </div>
+                        <div class="card reveal-on-scroll delay-3">
+                            <div class="card-img">
+                                <img src="https://images.unsplash.com/photo-1504670073073-6123e39e0754?q=80&w=1740&auto=format&fit=crop" alt="Golden Dessert" loading="lazy">
+                            </div>
+                            <div class="card-content">
+                                <h3>Valrhona Textures</h3>
+                                <p>Dark chocolate ganache, hazelnut praline, 24k gold leaf.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="section-padding awards-section">
+                <div class="container center reveal-on-scroll">
+                    <div class="awards-grid">
+                        <div class="award-item">★ ★ ★<br>Michelin Guide 2026</div>
+                        <div class="award-item">"World's 50 Best"<br>Ranked #12</div>
+                        <div class="award-item glow-text">"A masterclass in flavor."<br>— The New York Times</div>
+                        <div class="award-item">James Beard Award<br>Outstanding Chef</div>
+                    </div>
+                </div>
+            </section>
+        </section>
+
+        <section id="menu" class="page-view">
+            <header class="page-header dark-bg">
+                <h1 class="title reveal-on-scroll glow-text">The Menu</h1>
+                <p class="subtitle reveal-on-scroll delay-1">A tasting journey of land and sea.</p>
+            </header>
+            
+            <section class="menu-container container section-padding">
+                <div class="menu-nav reveal-on-scroll">
+                    <button class="active" data-tab="tasting">Tasting Menu</button>
+                    <button data-tab="alacarte">A La Carte</button>
+                    <button data-tab="wine">Wine Pairings</button>
+                </div>
+
+                <div class="menu-content active" id="menu-tasting">
+                    <div class="menu-section reveal-on-scroll">
+                        <h3 class="menu-category">Act I: The Sea</h3>
+                        <div class="menu-item">
+                            <div class="menu-item-header">
+                                <h4>Osetra Caviar Tartlet</h4>
+                                <span class="price">$45</span>
+                            </div>
+                            <p>Crème fraîche, cured egg yolk, chive oil.</p>
+                        </div>
+                        <div class="menu-item">
+                            <div class="menu-item-header">
+                                <h4>Bluefin Tuna Otoro</h4>
+                                <span class="price">$52</span>
+                            </div>
+                            <p>White soy, finger lime, puffed wild rice.</p>
+                        </div>
+                    </div>
+
+                    <div class="menu-section reveal-on-scroll delay-1">
+                        <h3 class="menu-category">Act II: The Land</h3>
+                        <div class="menu-item highlight relative-glow">
+                            <div class="menu-item-header">
+                                <h4>Dry-Aged Squab</h4>
+                                <span class="price">$78</span>
+                            </div>
+                            <p>Blackberry gastrique, charred radicchio, foie gras jus.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="menu-content" id="menu-alacarte">
+                    <div class="menu-section reveal-on-scroll">
+                        <h3 class="menu-category">Mains</h3>
+                        <div class="menu-item">
+                            <div class="menu-item-header">
+                                <h4>Butter-Poached Lobster</h4>
+                                <span class="price">$85</span>
+                            </div>
+                            <p>Saffron risotto, sea urchin emulsion, fennel pollen.</p>
+                        </div>
+                        <div class="menu-item">
+                            <div class="menu-item-header">
+                                <h4>Iberico Pork Presa</h4>
+                                <span class="price">$65</span>
+                            </div>
+                            <p>Charred leek, black garlic, pickled mustard seed.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="menu-content" id="menu-wine">
+                    <div class="menu-section reveal-on-scroll">
+                        <h3 class="menu-category">Sommelier Selection</h3>
+                        <div class="menu-item">
+                            <div class="menu-item-header">
+                                <h4>Domaine de la Romanée-Conti, 2014</h4>
+                                <span class="price">$450 / gls</span>
+                            </div>
+                            <p>Notes of dark cherry, crushed violet, and forest floor.</p>
+                        </div>
+                        <div class="menu-item">
+                            <div class="menu-item-header">
+                                <h4>Krug Grande Cuvée 169ème Édition</h4>
+                                <span class="price">$120 / gls</span>
+                            </div>
+                            <p>Toasted brioche, hazelnut, bright citrus.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </section>
+
+        <section id="sensory" class="page-view">
+            <header class="page-header dark-bg">
+                <h1 class="title reveal-on-scroll glow-text">The Sensory Canvas</h1>
+                <p class="subtitle reveal-on-scroll delay-1">Hover to discover the alchemy behind our pairings.</p>
+            </header>
+            <div class="sensory-container container section-padding">
+                <div class="sensory-grid reveal-on-scroll">
+                    <div class="sensory-card" data-aura="rgba(197, 160, 89, 0.15)">
+                        <div class="sensory-bg" style="background-image: url('https://images.unsplash.com/photo-1600891964092-4316c288032e?q=80&w=1740&auto=format&fit=crop');"></div>
+                        <div class="sensory-content">
+                            <h3>Earth & Smoke</h3>
+                            <p class="hidden-desc">Black Winter Truffle meets A5 Wagyu. Paired with a robust 2010 Barolo to elevate the deep, umami resonance.</p>
+                        </div>
+                    </div>
+                    <div class="sensory-card" data-aura="rgba(100, 149, 237, 0.1)">
+                        <div class="sensory-bg" style="background-image: url('https://images.unsplash.com/photo-1515516969-d4008cc6241a?q=80&w=1587&auto=format&fit=crop');"></div>
+                        <div class="sensory-content">
+                            <h3>Oceanic Brine</h3>
+                            <p class="hidden-desc">Hokkaido Scallop and Citrus Caviar. Awakened by a crisp, mineral-driven Chablis Grand Cru.</p>
+                        </div>
+                    </div>
+                    <div class="sensory-card" data-aura="rgba(139, 0, 0, 0.15)">
+                        <div class="sensory-bg" style="background-image: url('https://images.unsplash.com/photo-1504670073073-6123e39e0754?q=80&w=1740&auto=format&fit=crop');"></div>
+                        <div class="sensory-content">
+                            <h3>Velvet Cocoa</h3>
+                            <p class="hidden-desc">Valrhona Dark Chocolate layered with hazelnut. Harmonized with an aged Tawny Port.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="reservations" class="page-view">
+            <div class="grid-2 full-height">
+                <div class="reservation-image relative-glow">
+                    <img src="https://images.unsplash.com/photo-1544148103-0773bf10d330?q=80&w=1740&auto=format&fit=crop" alt="Table Setting" loading="lazy">
+                </div>
+                <div class="reservation-form-container section-padding glass-panel">
+                    <div class="reveal-on-scroll">
+                        <h1 class="title glow-text">Reservations</h1>
+                        <p class="scarcity-text mb-4">Limited seating available. A refined experience awaits.</p>
+                        
+                        <form id="booking-form" class="booking-form">
+                            <div class="form-step active" id="step-1">
+                                <div class="form-row grid-2">
+                                    <div class="form-group">
+                                        <label>Date</label>
+                                        <input type="date" required class="custom-input">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Guests</label>
+                                        <!-- FIX: Added explicit numeric values to options so split()[0] works correctly -->
+                                        <select class="custom-input" required>
+                                            <option value="" disabled selected>Select party size</option>
+                                            <option value="2">2 People</option>
+                                            <option value="3">3 People</option>
+                                            <option value="4">4 People</option>
+                                            <option value="5">5+ People (Contact Us)</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label>Experience</label>
+                                    <select class="custom-input">
+                                        <option>Main Dining Room</option>
+                                        <option>Chef's Counter (Tasting Only)</option>
+                                        <option>The Glass Room (Private)</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label>Select Time</label>
+                                    <div class="time-slots">
+                                        <button type="button" class="time-btn" disabled>6:00 PM</button>
+                                        <button type="button" class="time-btn active">7:30 PM</button>
+                                        <button type="button" class="time-btn">8:00 PM</button>
+                                        <button type="button" class="time-btn">9:30 PM</button>
+                                    </div>
+                                </div>
+                                <button type="button" class="btn-primary w-100 mt-3" id="next-step-btn">Continue</button>
+                            </div>
+
+                            <div class="form-step" id="step-2" style="display: none;">
+                                <div class="form-group">
+                                    <label>Full Name</label>
+                                    <input type="text" placeholder="Your name" required class="custom-input">
+                                </div>
+                                <div class="form-group mt-2">
+                                    <label>Email Address</label>
+                                    <input type="email" placeholder="Email" required class="custom-input">
+                                </div>
+                                <!-- FIX 3: Added missing phone field — api.js requires it or submitReservation returns error -->
+                                <div class="form-group mt-2">
+                                    <label>Phone Number</label>
+                                    <input type="tel" placeholder="+1 (212) 555-0000" required class="custom-input">
+                                </div>
+                                <div class="form-group mt-2">
+                                    <label>Dietary Restrictions / Occasion</label>
+                                    <textarea placeholder="Allergies, anniversaries..." class="custom-input" rows="2"></textarea>
+                                </div>
+                                <div class="grid-2 mt-3">
+                                    <button type="button" class="btn-secondary" id="prev-step-btn">Back</button>
+                                    <button type="submit" class="btn-primary">Confirm Booking</button>
+                                </div>
+                            </div>
+                            
+                            <div class="form-success text-center" id="form-success" style="display: none;">
+                                <div class="glow-text title mb-3">✓</div>
+                                <h3>Request Received</h3>
+                                <p class="mt-2">Our concierge will review your request and send a confirmation email shortly.</p>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="about" class="page-view">
+             <header class="page-header dark-bg">
+                <h1 class="title reveal-on-scroll glow-text">Our Philosophy</h1>
+            </header>
+            <section class="section-padding container">
+                <div class="grid-2 align-center">
+                    <div class="editorial-image reveal-on-scroll relative-glow">
+                        <img src="https://images.unsplash.com/photo-1583394838336-acd977736f90?q=80&w=1584&auto=format&fit=crop" alt="Executive Chef" loading="lazy">
+                    </div>
+                    <div class="editorial-text reveal-on-scroll delay-1">
+                        <h2 class="section-title">Chef Julian Vane</h2>
+                        <p>With over two decades in the finest kitchens across Paris and Tokyo, Chef Vane brings a philosophy rooted in respect. Respect for the farmer, respect for the ingredient, and respect for the guest.</p>
+                        <p>Aurelia was born from a desire to strip away the pretension of fine dining while elevating the core experience. Every element, from the bespoke ceramics to the acoustic design of the dining room, serves one purpose: pure culinary immersion.</p>
+                    </div>
+                </div>
+            </section>
+        </section>
+
+        <section id="gallery" class="page-view">
+            <header class="page-header">
+                <h1 class="title reveal-on-scroll glow-text">Gallery</h1>
+            </header>
+            <div class="container section-padding">
+                <div class="masonry-grid reveal-on-scroll delay-1">
+                    <div class="masonry-item relative-glow"><img src="https://images.unsplash.com/photo-1550966871-3ed3cdb5ed0c?q=80&w=2070&auto=format&fit=crop" alt="Gallery 1" loading="lazy"></div>
+                    <div class="masonry-item relative-glow"><img src="https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?q=80&w=2070&auto=format&fit=crop" alt="Gallery 2" loading="lazy"></div>
+                    <div class="masonry-item relative-glow"><img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?q=80&w=2070&auto=format&fit=crop" alt="Gallery 3" loading="lazy"></div>
+                    <div class="masonry-item relative-glow"><img src="https://images.unsplash.com/photo-1544148103-0773bf10d330?q=80&w=1740&auto=format&fit=crop" alt="Gallery 4" loading="lazy"></div>
+                    <div class="masonry-item relative-glow"><img src="https://images.unsplash.com/photo-1600891964092-4316c288032e?q=80&w=1740&auto=format&fit=crop" alt="Gallery 5" loading="lazy"></div>
+                    <div class="masonry-item relative-glow"><img src="https://images.unsplash.com/photo-1583394838336-acd977736f90?q=80&w=1584&auto=format&fit=crop" alt="Gallery 6" loading="lazy"></div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="page-view">
+             <header class="page-header dark-bg">
+                <h1 class="title reveal-on-scroll glow-text">Contact</h1>
+            </header>
+            <div class="grid-2">
+                <div class="map-placeholder glass-panel">
+                    <img src="https://images.unsplash.com/photo-1524661135-423995f22d0b?q=80&w=1748&auto=format&fit=crop" alt="Location Map" style="width: 100%; height: 100%; object-fit: cover; filter: grayscale(100%) contrast(1.2) opacity(0.6);">
+                    <div class="map-overlay">AURELIA</div>
+                </div>
+                <div class="contact-info section-padding reveal-on-scroll">
+                    <h2 class="section-title">Get in Touch</h2>
+                    <div class="info-block mt-4">
+                        <h4>Address</h4>
+                        <p>128 High-End Avenue, <br>Culinary District, NY 10001</p>
+                    </div>
+                    <div class="info-block mt-3">
+                        <h4>Hours</h4>
+                        <p>Tuesday – Sunday: 5:30 PM – 11:00 PM<br>Monday: Closed</p>
+                    </div>
+                    <div class="info-block mt-3">
+                        <h4>Contact</h4>
+                        <p>+1 (212) 555-0199<br><a href="mailto:hello@aurelia.com">hello@aurelia.com</a></p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="site-footer glass-panel">
+        <div class="container grid-3">
+            <div class="footer-brand">
+                <h2 class="glow-text">AURELIA</h2>
+                <p>A Michelin-Starred Experience.</p>
+            </div>
+            <div class="footer-links">
+                <h4>Navigation</h4>
+                <a href="#home" class="route-link">Home</a>
+                <a href="#menu" class="route-link">Menu</a>
+                <a href="#reservations" class="route-link">Reservations</a>
+            </div>
+            <div class="footer-newsletter">
+                <h4>Newsletter</h4>
+                <p>Exclusive invites and seasonal updates.</p>
+                <!-- FIX 4: Removed hardcoded onsubmit="event.preventDefault()" — it blocked app.js submit listener -->
+                <form class="newsletter-form">
+                    <input type="email" placeholder="Email Address">
+                    <button type="submit">→</button>
+                </form>
+            </div>
+        </div>
+        <div class="footer-bottom container">
+            <p>&copy; 2026 Aurelia Fine Dining. All rights reserved.</p>
+            <p><a href="admin.html" style="color:var(--clr-text-muted);opacity:0.4">Admin</a></p>
+        </div>
+    </footer>
+
+    <!--
+      FIX 2: Inline plain <script> (non-module) dismisses loader after 1800ms.
+      Runs synchronously — immune to ES module parse errors in app.js.
+
+      FIX 8: window.__ENV keys are now camelCase to match api.js getConfig() fallback.
+      Leave values empty for production (Vercel injects via /api/config).
+      Fill them in for local dev only — never commit real keys.
+    -->
+    <script>
+      setTimeout(function() {
+        document.body.classList.remove('loading');
+        document.body.classList.add('loaded');
+      }, 1800);
+
+      window.__ENV = {
+        supabaseUrl:            '',
+        supabaseAnonKey:        '',
+        cloudinaryCloudName:    '',
+        cloudinaryUploadPreset: '',
+        googleReviewUrl:        'https://g.page/r/YOUR_PLACE_ID/review',
+      };
+    </script>
+    <script type="module" src="app.js"></script>
+</body>
+</html>

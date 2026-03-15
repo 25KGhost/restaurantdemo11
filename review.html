@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AURELIA — Share Your Experience</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    /* ── Review Page Specific Styles ── */
+    .review-page {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+    }
+
+    .review-card {
+      max-width: 520px;
+      width: 100%;
+      padding: 5rem 4rem;
+      text-align: center;
+      background: var(--glass-bg);
+      backdrop-filter: blur(16px);
+      border: 1px solid var(--clr-border);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .review-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--clr-accent), transparent);
+    }
+
+    .review-logo {
+      font-family: var(--font-heading);
+      font-size: 1.8rem;
+      letter-spacing: 8px;
+      text-shadow: var(--glow-subtle);
+      margin-bottom: 0.5rem;
+    }
+
+    .review-intro {
+      color: var(--clr-text-muted);
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      margin-bottom: 4rem;
+    }
+
+    /* ── Star Rating ── */
+    .star-picker {
+      display: flex;
+      justify-content: center;
+      gap: 0.8rem;
+      margin-bottom: 3rem;
+    }
+
+    .star-picker .star {
+      font-size: 2.8rem;
+      color: rgba(255,255,255,0.15);
+      cursor: pointer;
+      transition: color 0.2s, transform 0.2s;
+      user-select: none;
+      line-height: 1;
+    }
+
+    .star-picker .star.active,
+    .star-picker .star.hover {
+      color: var(--clr-accent);
+      text-shadow: var(--glow-subtle);
+    }
+
+    .star-picker .star:hover { transform: scale(1.2); }
+
+    .rating-label {
+      font-family: var(--font-heading);
+      font-size: 1.3rem;
+      color: var(--clr-text-muted);
+      margin-bottom: 2rem;
+      min-height: 1.5em;
+      transition: color 0.3s;
+    }
+
+    /* ── Feedback Form (shown for ratings <= 3) ── */
+    #feedback-section {
+      display: none;
+      text-align: left;
+      margin-top: 2rem;
+      animation: fadeUp 0.5s forwards;
+    }
+
+    #feedback-section textarea {
+      width: 100%;
+      min-height: 120px;
+      resize: vertical;
+    }
+
+    /* ── States ── */
+    #review-success, #redirect-notice {
+      display: none;
+      animation: fadeUp 0.5s forwards;
+    }
+
+    .review-check {
+      font-size: 3rem;
+      color: var(--clr-accent);
+      text-shadow: var(--glow-strong);
+      margin-bottom: 1rem;
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(15px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body class="loaded">
+  <div class="ambient-background"></div>
+
+  <div class="review-page">
+    <div class="review-card">
+
+      <!-- Step 1: Star rating -->
+      <div id="rating-section">
+        <p class="review-logo">AURELIA</p>
+        <p class="review-intro">How was your experience?</p>
+
+        <div class="star-picker" id="star-picker" role="group" aria-label="Rate your experience">
+          <span class="star" data-value="1" role="button" tabindex="0" aria-label="1 star">★</span>
+          <span class="star" data-value="2" role="button" tabindex="0" aria-label="2 stars">★</span>
+          <span class="star" data-value="3" role="button" tabindex="0" aria-label="3 stars">★</span>
+          <span class="star" data-value="4" role="button" tabindex="0" aria-label="4 stars">★</span>
+          <span class="star" data-value="5" role="button" tabindex="0" aria-label="5 stars">★</span>
+        </div>
+
+        <p class="rating-label" id="rating-label">Tap to rate</p>
+      </div>
+
+      <!-- Step 2a: Redirect to Google (rating >= 4) -->
+      <div id="redirect-notice">
+        <div class="review-check">★</div>
+        <h2 class="section-title glow-text" style="font-size:2rem">We're delighted!</h2>
+        <p style="color:var(--clr-text-muted);margin:1.5rem 0">
+          Redirecting you to Google Reviews…
+        </p>
+        <a id="google-review-link" href="#" class="btn-primary" target="_blank" rel="noopener">
+          Leave a Review on Google
+        </a>
+      </div>
+
+      <!-- Step 2b: Internal feedback form (rating <= 3) -->
+      <div id="feedback-section">
+        <h2 class="section-title" style="font-size:1.8rem;text-align:center;margin-bottom:1rem">
+          We're sorry to hear that.
+        </h2>
+        <p style="color:var(--clr-text-muted);font-size:.9rem;text-align:center;margin-bottom:2rem">
+          Please tell us what we can do better. Your feedback is private and goes directly to our team.
+        </p>
+        <form id="feedback-form">
+          <!-- Honeypot -->
+          <input type="text" name="website" style="display:none" tabindex="-1" autocomplete="off">
+          <div class="form-group">
+            <label>Your Feedback</label>
+            <textarea
+              id="feedback-message"
+              class="custom-input"
+              rows="4"
+              maxlength="1000"
+              placeholder="Tell us what happened…"
+              required
+            ></textarea>
+          </div>
+          <p class="form-error" id="feedback-error"></p>
+          <button type="submit" class="btn-primary w-100 mt-3" id="feedback-btn">
+            Send Feedback
+          </button>
+        </form>
+      </div>
+
+      <!-- Step 3: Success -->
+      <div id="review-success">
+        <div class="review-check">✓</div>
+        <h2 class="section-title glow-text" style="font-size:2rem">Thank You</h2>
+        <p style="color:var(--clr-text-muted);margin-top:1rem">
+          Your feedback helps us become better. We appreciate your honesty.
+        </p>
+        <a href="index.html" class="btn-secondary" style="margin-top:2.5rem;display:inline-block">
+          Back to Aurelia
+        </a>
+      </div>
+
+    </div>
+  </div>
+
+  <script type="module">
+    // FIX 5: api.js exports `getConfig` (a function), NOT a `CONFIG` object.
+    // Original code did `import { submitReview, CONFIG } from './api.js'` — CONFIG was always undefined,
+    // crashing the Google redirect. Now we import getConfig and call it to resolve the URL.
+    import { submitReview, getConfig } from './api.js';
+
+    const ratingLabels = ['', 'Very Disappointed', 'Not Satisfied', 'It Was Okay', 'Great Experience!', 'Absolutely Stellar!'];
+    let selectedRating = 0;
+
+    const stars           = document.querySelectorAll('.star');
+    const label           = document.getElementById('rating-label');
+    const ratingSection   = document.getElementById('rating-section');
+    const feedbackSection = document.getElementById('feedback-section');
+    const redirectNotice  = document.getElementById('redirect-notice');
+    const successSection  = document.getElementById('review-success');
+
+    // Hover effects
+    stars.forEach(star => {
+      star.addEventListener('mouseenter', () => {
+        const val = parseInt(star.dataset.value);
+        stars.forEach(s => s.classList.toggle('hover', parseInt(s.dataset.value) <= val));
+        label.textContent = ratingLabels[val] || '';
+      });
+      star.addEventListener('mouseleave', () => {
+        stars.forEach(s => s.classList.remove('hover'));
+        label.textContent = selectedRating ? ratingLabels[selectedRating] : 'Tap to rate';
+      });
+    });
+
+    // Click to select rating
+    stars.forEach(star => {
+      star.addEventListener('click', () => handleRating(parseInt(star.dataset.value)));
+      star.addEventListener('keydown', e => {
+        if (e.key === 'Enter' || e.key === ' ') handleRating(parseInt(star.dataset.value));
+      });
+    });
+
+    async function handleRating(rating) {
+      selectedRating = rating;
+      stars.forEach(s => s.classList.toggle('active', parseInt(s.dataset.value) <= rating));
+      label.textContent = ratingLabels[rating];
+      label.style.color = 'var(--clr-accent)';
+
+      setTimeout(async () => {
+        ratingSection.style.display = 'none';
+
+        if (rating >= 4) {
+          // FIX 5: getConfig() is async — await it to get the URL
+          const cfg = await getConfig();
+          const googleUrl = cfg.googleReviewUrl || '#';
+          document.getElementById('google-review-link').href = googleUrl;
+          redirectNotice.style.display = 'block';
+          // Auto-redirect after 2s
+          setTimeout(() => { window.location.href = googleUrl; }, 2000);
+        } else {
+          feedbackSection.style.display = 'block';
+        }
+      }, 600);
+    }
+
+    // Internal feedback form submission
+    document.getElementById('feedback-form')?.addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      // Honeypot
+      const trap = e.target.querySelector('[name="website"]');
+      if (trap?.value) return;
+
+      const btn     = document.getElementById('feedback-btn');
+      const message = document.getElementById('feedback-message').value.trim();
+      const errEl   = document.getElementById('feedback-error');
+
+      if (!message) { errEl.textContent = 'Please write a message.'; return; }
+
+      btn.disabled    = true;
+      btn.textContent = 'Sending…';
+
+      const result = await submitReview({ rating: selectedRating, message });
+
+      if (result.ok) {
+        feedbackSection.style.display = 'none';
+        successSection.style.display  = 'block';
+      } else {
+        errEl.textContent  = result.message;
+        btn.disabled       = false;
+        btn.textContent    = 'Send Feedback';
+      }
+    });
+  </script>
+</body>
+</html>

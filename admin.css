@@ -1,0 +1,247 @@
+/* ============================================================
+   AURELIA — admin.css
+   Admin dashboard styles. Extends styles.css variables.
+   Every class referenced in admin.html and admin.js is here.
+   ============================================================ */
+
+/* ─── ADMIN BODY OVERRIDES ──────────────────────────────────── */
+.admin-body {
+    cursor: default;
+    overflow-x: hidden;
+    background-color: #050507;
+}
+/* Suppress public-site cursor elements */
+.admin-body .cursor-dot,
+.admin-body .cursor-outline { display: none; }
+
+/* ─── LOGIN SCREEN ──────────────────────────────────────────── */
+#admin-login-screen {
+    min-height: 100vh;
+    display: flex; align-items: center; justify-content: center;
+    background: var(--gradient-bg);
+}
+.login-box {
+    width: 100%; max-width: 400px;
+    padding: 4rem 3rem; border-radius: 12px;
+    background: rgba(14, 14, 17, 0.6);
+    backdrop-filter: blur(40px); -webkit-backdrop-filter: blur(40px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: 0 30px 60px rgba(0,0,0,0.3);
+}
+.login-logo {
+    font-family: var(--font-heading);
+    font-size: 2rem; letter-spacing: 0.3em;
+    text-align: center; display: block; margin-bottom: 0.5rem;
+}
+
+/* ─── DASHBOARD SHELL ───────────────────────────────────────── */
+#admin-dashboard {
+    display: flex; min-height: 100vh;
+    background: #09090b;
+}
+
+/* ─── SIDEBAR ───────────────────────────────────────────────── */
+.admin-sidebar {
+    width: 260px; flex-shrink: 0;
+    display: flex; flex-direction: column;
+    padding: 2.5rem 1.5rem;
+    background: rgba(14, 14, 17, 0.4);
+    backdrop-filter: blur(20px);
+    border-right: 1px solid rgba(255,255,255,0.04);
+    position: sticky; top: 0; height: 100vh; overflow-y: auto;
+}
+.sidebar-logo            { margin-bottom: 3rem; padding: 0 1rem; }
+.sidebar-logo span       { font-family: var(--font-heading); font-size: 1.4rem; letter-spacing: 0.2em; display: block; }
+.sidebar-logo small      { font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.15em; color: var(--clr-text-muted); font-weight: 500; }
+.sidebar-nav             { display: flex; flex-direction: column; gap: 0.5rem; flex: 1; }
+.sidebar-link {
+    background: none; border: none; border-radius: 6px;
+    color: var(--clr-text-muted); font-family: var(--font-body);
+    font-size: 0.85rem; font-weight: 500;
+    padding: 0.8rem 1rem; text-align: left; cursor: pointer;
+    transition: all 0.3s var(--bezier-snappy);
+}
+.sidebar-link:hover          { background: rgba(255,255,255,0.03); color: var(--clr-text); }
+.sidebar-link.active         { color: var(--clr-bg); background: var(--clr-text); box-shadow: 0 4px 12px rgba(255,255,255,0.1); }
+.sidebar-logout {
+    margin-top: auto; font-size: 0.75rem; padding: 0.8rem; cursor: pointer;
+    border: none; background: rgba(255,255,255,0.05); border-radius: 6px;
+    color: var(--clr-text-muted);
+    transition: background 0.3s ease;
+}
+.sidebar-logout:hover        { background: rgba(255,255,255,0.1); color: var(--clr-text); }
+
+/* ─── MAIN CONTENT ──────────────────────────────────────────── */
+.admin-main {
+    flex: 1; padding: 4rem 5%; overflow-y: auto;
+}
+.admin-header {
+    display: flex; justify-content: space-between; align-items: flex-end;
+    margin-bottom: 3rem; padding-bottom: 1.5rem;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+.admin-section-title { font-size: 2.2rem; margin-bottom: 0.3rem; }
+.admin-section-sub   { color: var(--clr-text-muted); font-size: 0.85rem; letter-spacing: 0.05em; }
+
+/* ─── SECTIONS ──────────────────────────────────────────────── */
+.admin-section        { display: none; animation: fadeUp 0.6s var(--bezier-smooth); }
+.admin-section.active { display: block; }
+@keyframes fadeUp { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+/* ─── FILTER BAR ────────────────────────────────────────────── */
+.admin-filters {
+    display: flex; gap: 0.5rem; margin-bottom: 2rem; flex-wrap: wrap;
+    background: rgba(255,255,255,0.02); padding: 0.4rem; border-radius: 8px;
+    width: max-content;
+}
+.filter-btn {
+    background: transparent; border: none; border-radius: 6px;
+    color: var(--clr-text-muted); font-family: var(--font-body);
+    font-size: 0.8rem; font-weight: 500; padding: 0.5rem 1.2rem;
+    cursor: pointer; transition: all 0.3s var(--bezier-snappy);
+}
+.filter-btn:hover            { color: var(--clr-text); }
+.filter-btn.active           { background: rgba(255,255,255,0.1); color: var(--clr-text); box-shadow: 0 2px 8px rgba(0,0,0,0.2); }
+
+/* ─── TOOLBAR ───────────────────────────────────────────────── */
+.admin-toolbar               { display: flex; align-items: center; gap: 1.5rem; margin-bottom: 2rem; flex-wrap: wrap; }
+.upload-label                { cursor: pointer; display: inline-flex; align-items: center; gap: 0.5rem; }
+
+/* ─── DATA TABLES ───────────────────────────────────────────── */
+.admin-table-wrap {
+    overflow-x: auto;
+    background: rgba(255,255,255,0.01);
+    border: 1px solid rgba(255,255,255,0.04);
+    border-radius: 12px;
+}
+.admin-table                 { width: 100%; border-collapse: collapse; font-size: 0.9rem; }
+.admin-table th {
+    text-align: left; padding: 1.2rem 1.5rem;
+    font-family: var(--font-body); font-size: 0.75rem;
+    text-transform: uppercase; letter-spacing: 0.05em;
+    color: var(--clr-text-muted);
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+    white-space: nowrap; font-weight: 500;
+}
+.admin-table td {
+    padding: 1.2rem 1.5rem;
+    border-bottom: 1px solid rgba(255,255,255,0.02);
+    color: var(--clr-text); vertical-align: middle;
+    max-width: 250px; overflow: hidden;
+    text-overflow: ellipsis; white-space: nowrap;
+}
+.admin-table td.td-name      { font-weight: 500; font-size: 1rem; }
+.admin-table tr:hover td     { background: rgba(255,255,255,0.015); }
+
+/* Status badges */
+.status-badge {
+    display: inline-block; padding: 0.3rem 0.8rem;
+    font-size: 0.7rem; font-weight: 500; border-radius: 20px;
+}
+.status-pending              { background: rgba(212, 195, 173, 0.15); color: var(--clr-accent); }
+.status-confirmed            { background: rgba(129, 199, 132, 0.15); color: #81c784; }
+.status-rejected             { background: rgba(229, 57, 53, 0.15);   color: #ef9a9a; }
+
+/* Table action buttons */
+.tbl-btn {
+    background: transparent; border: none; color: var(--clr-text-muted);
+    font-family: var(--font-body); font-size: 0.8rem; font-weight: 500;
+    padding: 0.4rem 0.8rem; border-radius: 4px;
+    cursor: pointer; transition: all 0.2s; margin-right: 0.2rem;
+}
+.tbl-btn:hover               { background: rgba(255,255,255,0.05); color: var(--clr-text); }
+.tbl-btn.confirm:hover       { background: rgba(129, 199, 132, 0.1); color: #81c784; }
+.tbl-btn.reject:hover,
+.tbl-btn.delete:hover        { background: rgba(229, 57, 53, 0.1);   color: #ef9a9a; }
+.tbl-btn.edit:hover          { background: rgba(208, 195, 173, 0.1); color: var(--clr-accent); }
+
+/* ─── MENU FORM PANEL ───────────────────────────────────────── */
+.admin-form-panel {
+    padding: 2.5rem; margin-bottom: 2.5rem;
+    border-radius: 12px;
+    background: rgba(255,255,255,0.02);
+    border: 1px solid rgba(255,255,255,0.05);
+}
+.admin-form-panel h3         { font-size: 1.6rem; margin-bottom: 2rem; }
+.admin-grid-2                { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+
+/* ─── GALLERY GRID ──────────────────────────────────────────── */
+.admin-gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 1.5rem;
+}
+.admin-gallery-item          { position: relative; aspect-ratio: 1/1; overflow: hidden; border-radius: 8px; }
+.admin-gallery-item img      { width: 100%; height: 100%; object-fit: cover; transition: transform 1s var(--bezier-smooth); }
+.admin-gallery-item:hover img { transform: scale(1.03); }
+.admin-gallery-item .gallery-item-actions {
+    position: absolute; inset: 0;
+    background: rgba(5,5,7,0.5);
+    display: flex; align-items: center; justify-content: center;
+    opacity: 0; transition: opacity 0.4s var(--bezier-smooth);
+}
+.admin-gallery-item:hover .gallery-item-actions { opacity: 1; }
+.admin-gallery-item .gallery-item-caption {
+    position: absolute; bottom: 0; left: 0; right: 0; padding: 1rem;
+    background: linear-gradient(transparent, rgba(0,0,0,0.9));
+    font-size: 0.8rem; color: var(--clr-text);
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+
+/* ─── STAR RATING (reviews table) ──────────────────────────── */
+.star-rating                 { color: var(--clr-accent); letter-spacing: 2px; }
+
+/* ─── LOADING / EMPTY STATES ────────────────────────────────── */
+/* Used by admin.js innerHTML rendering */
+.loading-msg {
+    color: var(--clr-text-muted); font-size: 0.85rem;
+    padding: 4rem 0; text-align: center;
+    text-transform: uppercase; letter-spacing: 0.15em;
+}
+.empty-state {
+    color: var(--clr-text-muted); font-size: 0.85rem;
+    padding: 5rem 0; text-align: center;
+    text-transform: uppercase; letter-spacing: 0.15em;
+}
+
+/* ─── TOAST NOTIFICATIONS ───────────────────────────────────── */
+.admin-toast {
+    position: fixed; bottom: 2rem; left: 50%;
+    transform: translate(-50%, 20px) scale(0.95);
+    background: rgba(30, 30, 35, 0.9);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255,255,255,0.1);
+    padding: 1rem 2rem; border-radius: 30px;
+    font-size: 0.9rem; font-weight: 500;
+    opacity: 0; transition: all 0.5s var(--bezier-smooth);
+    z-index: 9999; min-width: 260px; text-align: center;
+    pointer-events: none;
+}
+.admin-toast.show            { opacity: 1; transform: translate(-50%, 0) scale(1); }
+.admin-toast.success         { color: #f5f5f7; }
+.admin-toast.error           { color: #ef9a9a; border-color: rgba(229,57,53,0.3); }
+
+/* ─── FORM ERROR (shared with styles.css) ───────────────────── */
+/* Defined in styles.css as .form-error — no need to redefine */
+
+/* ─── RESPONSIVE ────────────────────────────────────────────── */
+@media (max-width: 900px) {
+    .admin-sidebar           { width: 200px; padding: 2rem 1rem; }
+    .admin-grid-2            { grid-template-columns: 1fr; }
+    .admin-main              { padding: 2rem 5%; }
+}
+
+@media (max-width: 600px) {
+    #admin-dashboard         { flex-direction: column; }
+    .admin-sidebar {
+        width: 100%; height: auto; position: static;
+        flex-direction: row; flex-wrap: wrap; gap: 0.5rem; padding: 1rem;
+    }
+    .sidebar-nav             { flex-direction: row; flex-wrap: wrap; }
+    .sidebar-logo,
+    .sidebar-logout          { display: none; }
+    .admin-table th,
+    .admin-table td          { padding: 1rem; }
+    .admin-filters           { width: 100%; }
+    .filter-btn              { padding: 0.5rem 0.8rem; }
+}

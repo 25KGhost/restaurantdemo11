@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AURELIA — Admin</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="admin.css">
+</head>
+<body class="admin-body loaded">
+
+  <!-- ── LOGIN SCREEN ── -->
+  <div id="admin-login-screen">
+    <div class="login-box glass-panel">
+      <h1 class="login-logo glow-text">AURELIA</h1>
+      <p class="subtitle" style="text-align:center;margin-bottom:2rem">Admin Portal</p>
+      <form id="login-form">
+        <!-- Honeypot -->
+        <input type="text" name="website" style="display:none" tabindex="-1" autocomplete="off">
+        <div class="form-group">
+          <label>Email</label>
+          <input type="email" id="admin-email" class="custom-input" required placeholder="admin@aurelia.com">
+        </div>
+        <div class="form-group mt-2">
+          <label>Password</label>
+          <input type="password" id="admin-password" class="custom-input" required placeholder="••••••••">
+        </div>
+        <p class="form-error" id="login-error"></p>
+        <button type="submit" class="btn-primary w-100 mt-3" id="login-btn">Sign In</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- ── DASHBOARD ── -->
+  <div id="admin-dashboard" style="display:none">
+    <aside class="admin-sidebar glass-panel">
+      <div class="sidebar-logo">
+        <span class="glow-text">AURELIA</span>
+        <small>Admin</small>
+      </div>
+      <nav class="sidebar-nav">
+        <button class="sidebar-link active" data-section="reservations">Reservations</button>
+        <button class="sidebar-link" data-section="menu">Menu Manager</button>
+        <button class="sidebar-link" data-section="gallery">Gallery</button>
+        <button class="sidebar-link" data-section="subscribers">Newsletter</button>
+        <button class="sidebar-link" data-section="reviews">Reviews</button>
+      </nav>
+      <button class="btn-secondary sidebar-logout" id="logout-btn">Sign Out</button>
+    </aside>
+
+    <main class="admin-main">
+      <header class="admin-header">
+        <div>
+          <h2 class="admin-section-title" id="section-title">Reservations</h2>
+          <p class="admin-section-sub" id="section-sub">Manage incoming table requests</p>
+        </div>
+        <div id="header-actions"></div>
+      </header>
+
+      <!-- RESERVATIONS -->
+      <section id="section-reservations" class="admin-section active">
+        <div class="admin-filters">
+          <button class="filter-btn active" data-filter="all">All</button>
+          <button class="filter-btn" data-filter="pending">Pending</button>
+          <button class="filter-btn" data-filter="confirmed">Confirmed</button>
+          <button class="filter-btn" data-filter="rejected">Rejected</button>
+        </div>
+        <div id="reservations-table-wrap">
+          <p class="loading-msg">Loading reservations…</p>
+        </div>
+      </section>
+
+      <!-- MENU MANAGER -->
+      <section id="section-menu" class="admin-section">
+        <div class="admin-toolbar">
+          <button class="btn-primary" id="add-item-btn">+ Add Item</button>
+        </div>
+        <!-- Add/Edit Form -->
+        <div id="menu-form-wrap" class="admin-form-panel glass-panel" style="display:none">
+          <h3 id="menu-form-title">Add Menu Item</h3>
+          <form id="menu-item-form">
+            <div class="admin-grid-2">
+              <div class="form-group">
+                <label>Name</label>
+                <input type="text" id="mi-name" class="custom-input" required maxlength="100">
+              </div>
+              <div class="form-group">
+                <label>Category</label>
+                <select id="mi-category" class="custom-input" required>
+                  <option value="starters">Starters</option>
+                  <option value="mains">Mains</option>
+                  <option value="desserts">Desserts</option>
+                  <option value="drinks">Drinks</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label>Price ($)</label>
+                <input type="number" id="mi-price" class="custom-input" required min="0" step="0.01">
+              </div>
+              <div class="form-group">
+                <label>Available</label>
+                <select id="mi-available" class="custom-input">
+                  <option value="true">Yes</option>
+                  <option value="false">No</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-group mt-2">
+              <label>Description</label>
+              <textarea id="mi-description" class="custom-input" rows="2" maxlength="500"></textarea>
+            </div>
+            <input type="hidden" id="mi-id">
+            <div class="admin-grid-2 mt-3">
+              <button type="button" class="btn-secondary" id="cancel-menu-form">Cancel</button>
+              <button type="submit" class="btn-primary">Save Item</button>
+            </div>
+          </form>
+        </div>
+        <div id="menu-table-wrap"><p class="loading-msg">Loading menu items…</p></div>
+      </section>
+
+      <!-- GALLERY MANAGER -->
+      <section id="section-gallery" class="admin-section">
+        <div class="admin-toolbar">
+          <label class="btn-primary upload-label">
+            + Upload Image
+            <input type="file" id="gallery-upload" accept="image/jpeg,image/png,image/webp" style="display:none">
+          </label>
+          <input type="text" id="gallery-caption" class="custom-input" placeholder="Caption (optional)" style="max-width:300px">
+        </div>
+        <div id="upload-progress" style="display:none">
+          <p class="loading-msg">Uploading to Cloudinary…</p>
+        </div>
+        <div id="gallery-admin-grid" class="admin-gallery-grid">
+          <p class="loading-msg">Loading gallery…</p>
+        </div>
+      </section>
+
+      <!-- NEWSLETTER SUBSCRIBERS -->
+      <section id="section-subscribers" class="admin-section">
+        <div class="admin-toolbar">
+          <button class="btn-primary" id="export-csv-btn">Export CSV</button>
+        </div>
+        <div id="subscribers-wrap"><p class="loading-msg">Loading subscribers…</p></div>
+      </section>
+
+      <!-- REVIEWS -->
+      <section id="section-reviews" class="admin-section">
+        <div id="reviews-wrap"><p class="loading-msg">Loading reviews…</p></div>
+      </section>
+    </main>
+  </div>
+
+  <script type="module" src="admin.js"></script>
+</body>
+</html>
