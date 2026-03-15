@@ -17,7 +17,6 @@
       <h1 class="login-logo glow-text">AURELIA</h1>
       <p class="subtitle" style="text-align:center;margin-bottom:2rem">Admin Portal</p>
       <form id="login-form">
-        <!-- Honeypot -->
         <input type="text" name="website" style="display:none" tabindex="-1" autocomplete="off">
         <div class="form-group">
           <label>Email</label>
@@ -42,6 +41,7 @@
       </div>
       <nav class="sidebar-nav">
         <button class="sidebar-link active" data-section="reservations">Reservations</button>
+        <button class="sidebar-link" data-section="analytics">Analytics</button>
         <button class="sidebar-link" data-section="menu">Menu Manager</button>
         <button class="sidebar-link" data-section="gallery">Gallery</button>
         <button class="sidebar-link" data-section="subscribers">Newsletter</button>
@@ -59,25 +59,34 @@
         <div id="header-actions"></div>
       </header>
 
-      <!-- RESERVATIONS -->
+      <!-- ── RESERVATIONS ── -->
       <section id="section-reservations" class="admin-section active">
         <div class="admin-filters">
           <button class="filter-btn active" data-filter="all">All</button>
-          <button class="filter-btn" data-filter="pending">Pending</button>
           <button class="filter-btn" data-filter="confirmed">Confirmed</button>
-          <button class="filter-btn" data-filter="rejected">Rejected</button>
+          <button class="filter-btn" data-filter="current">Current</button>
+          <button class="filter-btn" data-filter="pending">Pending</button>
+          <button class="filter-btn" data-filter="arrived">Arrived</button>
+          <button class="filter-btn" data-filter="no_show">No-show</button>
+          <button class="filter-btn" data-filter="cancelled">Cancelled</button>
         </div>
         <div id="reservations-table-wrap">
           <p class="loading-msg">Loading reservations…</p>
         </div>
       </section>
 
-      <!-- MENU MANAGER -->
+      <!-- ── ANALYTICS ── -->
+      <section id="section-analytics" class="admin-section">
+        <div id="analytics-wrap">
+          <p class="loading-msg">Loading analytics…</p>
+        </div>
+      </section>
+
+      <!-- ── MENU MANAGER ── -->
       <section id="section-menu" class="admin-section">
         <div class="admin-toolbar">
           <button class="btn-primary" id="add-item-btn">+ Add Item</button>
         </div>
-        <!-- Add/Edit Form -->
         <div id="menu-form-wrap" class="admin-form-panel glass-panel" style="display:none">
           <h3 id="menu-form-title">Add Menu Item</h3>
           <form id="menu-item-form">
@@ -121,7 +130,7 @@
         <div id="menu-table-wrap"><p class="loading-msg">Loading menu items…</p></div>
       </section>
 
-      <!-- GALLERY MANAGER -->
+      <!-- ── GALLERY ── -->
       <section id="section-gallery" class="admin-section">
         <div class="admin-toolbar">
           <label class="btn-primary upload-label">
@@ -138,7 +147,7 @@
         </div>
       </section>
 
-      <!-- NEWSLETTER SUBSCRIBERS -->
+      <!-- ── NEWSLETTER ── -->
       <section id="section-subscribers" class="admin-section">
         <div class="admin-toolbar">
           <button class="btn-primary" id="export-csv-btn">Export CSV</button>
@@ -146,11 +155,59 @@
         <div id="subscribers-wrap"><p class="loading-msg">Loading subscribers…</p></div>
       </section>
 
-      <!-- REVIEWS -->
+      <!-- ── REVIEWS ── -->
       <section id="section-reviews" class="admin-section">
         <div id="reviews-wrap"><p class="loading-msg">Loading reviews…</p></div>
       </section>
     </main>
+  </div>
+
+  <!-- ── CANCEL REASON MODAL ── -->
+  <div id="cancel-modal" style="display:none;position:fixed;inset:0;z-index:9000;background:rgba(0,0,0,0.7);backdrop-filter:blur(8px);display:none;align-items:center;justify-content:center">
+    <div class="admin-form-panel glass-panel" style="max-width:480px;width:90%;margin:0">
+      <h3 style="font-size:1.4rem;margin-bottom:1.5rem">Cancel Reservation</h3>
+      <div class="form-group">
+        <label>Reason for Cancellation</label>
+        <textarea id="cancel-reason-input" class="custom-input" rows="3" placeholder="Please provide a reason that will be sent to the guest…" maxlength="500"></textarea>
+      </div>
+      <p class="form-error" id="cancel-error"></p>
+      <div class="admin-grid-2 mt-3">
+        <button class="btn-secondary" id="cancel-modal-dismiss">Back</button>
+        <button class="btn-primary" id="cancel-modal-confirm" style="background:rgba(229,57,53,0.2);color:#ef9a9a;border-color:rgba(229,57,53,0.3)">Confirm Cancel</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── CHANGE TIME MODAL ── -->
+  <div id="time-change-modal" style="display:none;position:fixed;inset:0;z-index:9000;background:rgba(0,0,0,0.7);backdrop-filter:blur(8px);align-items:center;justify-content:center">
+    <div class="admin-form-panel glass-panel" style="max-width:480px;width:90%;margin:0">
+      <h3 style="font-size:1.4rem;margin-bottom:1.5rem">Change Reservation Time</h3>
+      <div class="admin-grid-2">
+        <div class="form-group">
+          <label>New Date</label>
+          <input type="date" id="new-res-date" class="custom-input">
+        </div>
+        <div class="form-group">
+          <label>New Time</label>
+          <select id="new-res-time" class="custom-input">
+            <option value="17:30">5:30 PM</option>
+            <option value="18:00">6:00 PM</option>
+            <option value="19:30">7:30 PM</option>
+            <option value="20:00">8:00 PM</option>
+            <option value="21:30">9:30 PM</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group mt-2">
+        <label>Reason / Note to Guest</label>
+        <textarea id="time-change-reason" class="custom-input" rows="2" placeholder="Optional note to include in email…" maxlength="300"></textarea>
+      </div>
+      <p class="form-error" id="time-change-error"></p>
+      <div class="admin-grid-2 mt-3">
+        <button class="btn-secondary" id="time-modal-dismiss">Cancel</button>
+        <button class="btn-primary" id="time-modal-confirm">Confirm Change</button>
+      </div>
+    </div>
   </div>
 
   <script type="module" src="admin.js"></script>

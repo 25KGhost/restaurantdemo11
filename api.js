@@ -1,28 +1,22 @@
 /**
- * AURELIA RESTAURANT — api.js  (Production version)
+ * AURELIA RESTAURANT — api.js
  * ─────────────────────────────────────────────────────────────
  * Central API module. All Supabase & Cloudinary interactions.
- *
- * Config is fetched from /api/config (Vercel serverless function)
- * so no keys ever appear in frontend source code or git history.
- *
- * To deploy for a new restaurant: change env vars in Vercel only.
+ * Config is fetched from /api/config (Vercel serverless function).
  * ─────────────────────────────────────────────────────────────
  */
 
 // ─── CONFIG LOADER ───────────────────────────────────────────
-// Fetched once from the serverless function, then cached in memory
 let _config = null;
 
 async function getConfig() {
   if (_config) return _config;
   try {
-    const res  = await fetch('/api/config');
-    _config    = await res.json();
+    const res = await fetch('/api/config');
+    _config   = await res.json();
     return _config;
   } catch (err) {
     console.error('[api] Could not load config:', err);
-    // Fallback: try window.__ENV if manually set (local dev)
     _config = window.__ENV || {};
     return _config;
   }
@@ -31,10 +25,8 @@ async function getConfig() {
 // ─── SUPABASE CLIENT ─────────────────────────────────────────
 const sb = {
   async _req(path, options = {}) {
-    const cfg = await getConfig();
-    const token = options.useServiceRole
-      ? null  // service_role only used server-side
-      : this._getToken();
+    const cfg   = await getConfig();
+    const token = this._getToken();
     const authKey = token || cfg.supabaseAnonKey;
 
     const res = await fetch(`${cfg.supabaseUrl}/rest/v1/${path}`, {
@@ -64,14 +56,11 @@ const sb = {
     } catch { return null; }
   },
 
-  query(path, options = {}) {
-    return this._req(path, options);
-  },
-
+  query(path, options = {})     { return this._req(path, options); },
   authQuery(path, options = {}) {
     const token = this._getToken();
     if (!token) throw new Error('Not authenticated');
-    return this._req(path, { ...options, headers: { ...(options.headers || {}) } });
+    return this._req(path, options);
   },
 };
 
@@ -91,9 +80,8 @@ const RateLimit = {
 // ─── INPUT SANITIZER ─────────────────────────────────────────
 function sanitize(str, maxLen = 255) {
   if (typeof str !== 'string') return '';
-  return str.slice(0, maxLen)
-    .replace(/[<>"'`]/g, c =>
-      ({'<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#x27;','`':'&#x60;'}[c]));
+  return str.slice(0, maxLen).replace(/[<>"'`]/g, c =>
+    ({ '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#x27;', '`':'&#x60;' }[c]));
 }
 
 function validateEmail(email) {
@@ -111,8 +99,7 @@ function detectHoneypot(formEl) {
 
 /**
  * submitReservation()
- * Posts to /api/reservation (serverless) which uses service_role key.
- * Falls back to direct Supabase insert if serverless not available.
+ * Auto-confirms reservation. Returns full reservation record including ID.
  */
 export async function submitReservation(formEl, data) {
   if (detectHoneypot(formEl)) return { ok: false, message: 'Blocked.' };
@@ -126,50 +113,52 @@ export async function submitReservation(formEl, data) {
     return { ok: false, message: 'Please enter a valid email address.' };
   if (parseInt(guests) < 1 || parseInt(guests) > 20)
     return { ok: false, message: 'Guest count must be between 1 and 20.' };
-  if (new Date(date) < new Date())
-    return { ok: false, message: 'Please select a future date.' };
 
+  const reservationDate = new Date(date);
+  const today = new Date(); today.setHours(0, 0, 0, 0);
+  const maxDate = new Date(today); maxDate.setDate(maxDate.getDate() + 60);
+  if (reservationDate < today)
+    return { ok: false, message: 'Please select a future date.' };
+  if (reservationDate > maxDate)
+    return { ok: false, message: 'Reservations can only be made up to 60 days in advance.' };
+
+  const payload = {
+    name:    sanitize(name, 100),
+    email:   sanitize(email, 100),
+    phone:   sanitize(phone, 30),
+    date,
+    time:    sanitize(time, 20),
+    guests:  parseInt(guests),
+    notes:   sanitize(notes, 500),
+    status:  'confirmed',  // Auto-confirm
+  };
+
+  // Try serverless first
   try {
-    // Try the serverless function first (uses service_role, can send email)
     const apiRes = await fetch('/api/reservation', {
       method:  'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        name:   sanitize(name, 100),
-        email:  sanitize(email, 100),
-        phone:  sanitize(phone, 30),
-        date,
-        time:   sanitize(time, 20),
-        guests: parseInt(guests),
-        notes:  sanitize(notes, 500),
-      }),
+      body:    JSON.stringify(payload),
     });
-
     if (apiRes.ok) {
       const result = await apiRes.json();
       return result;
     }
-
-    // If serverless returned an error, fall through to direct Supabase
     throw new Error('Serverless unavailable');
   } catch {
-    // Fallback: direct Supabase insert (uses anon key + RLS policy)
+    // Fallback: direct Supabase
     try {
-      await sb.query('reservations', {
+      const rows = await sb.query('reservations', {
         method: 'POST',
-        body: {
-          name:    sanitize(name, 100),
-          email:   sanitize(email, 100),
-          phone:   sanitize(phone, 30),
-          date,
-          time:    sanitize(time, 20),
-          guests:  parseInt(guests),
-          notes:   sanitize(notes, 500),
-          status:  'pending',
-        },
-        prefer: 'return=minimal',
+        body:   payload,
+        prefer: 'return=representation',
       });
-      return { ok: true, message: 'Reservation received. We will confirm shortly.' };
+      const reservation = Array.isArray(rows) ? rows[0] : rows;
+      return {
+        ok:          true,
+        reservation,
+        message:     'Reservation confirmed!',
+      };
     } catch (err) {
       console.error('[submitReservation]', err);
       return { ok: false, message: 'Something went wrong. Please try again.' };
@@ -179,7 +168,6 @@ export async function submitReservation(formEl, data) {
 
 /**
  * loadMenu()
- * Fetches available menu items grouped by category.
  */
 export async function loadMenu() {
   try {
@@ -223,7 +211,6 @@ export async function submitNewsletter(formEl, email) {
 
 /**
  * submitReview()
- * Only called for ratings <= 3 (internal feedback).
  */
 export async function submitReview(data) {
   if (!RateLimit.check('review', 2, 300_000))
@@ -273,7 +260,6 @@ export async function adminLogin(email, password) {
     });
     const data = await res.json();
     if (!res.ok) throw new Error(data.error_description || data.msg || 'Login failed');
-    // Store session
     const host = new URL(cfg.supabaseUrl).hostname.split('.')[0];
     localStorage.setItem(`sb-${host}-auth-token`, JSON.stringify(data));
     return { ok: true, user: data.user };
@@ -289,13 +275,32 @@ export function adminLogout() {
 }
 
 export async function adminFetchReservations(status) {
-  const filter = status ? `?status=eq.${status}&order=created_at.desc` : '?order=created_at.desc';
+  let filter = '?order=date.asc,time.asc';
+  if (status && status !== 'all') filter = `?status=eq.${status}&order=date.asc,time.asc`;
   return sb.authQuery(`reservations${filter}`);
 }
 
-export async function adminUpdateReservationStatus(id, status) {
+export async function adminUpdateReservationStatus(id, status, reason = '') {
+  const body = { status };
+  if (reason) body.cancel_reason = sanitize(reason, 500);
   return sb.authQuery(`reservations?id=eq.${id}`, {
-    method: 'PATCH', body: { status }, prefer: 'return=minimal',
+    method: 'PATCH', body, prefer: 'return=minimal',
+  });
+}
+
+export async function adminUpdateReservationTime(id, newDate, newTime) {
+  return sb.authQuery(`reservations?id=eq.${id}`, {
+    method: 'PATCH',
+    body:   { date: newDate, time: sanitize(newTime, 20), status: 'confirmed' },
+    prefer: 'return=minimal',
+  });
+}
+
+export async function adminMarkArrival(id, arrived) {
+  return sb.authQuery(`reservations?id=eq.${id}`, {
+    method: 'PATCH',
+    body:   { arrived_at: arrived ? new Date().toISOString() : null, status: arrived ? 'arrived' : 'confirmed' },
+    prefer: 'return=minimal',
   });
 }
 
@@ -350,11 +355,11 @@ export async function adminUploadImage(file, caption = '') {
     return { ok: false, message: 'File must be under 10MB.' };
 
   try {
-    const cfg      = await getConfig();
+    const cfg = await getConfig();
     const formData = new FormData();
-    formData.append('file',          file);
-    formData.append('upload_preset', cfg.cloudinaryUploadPreset);
-    formData.append('folder',        'aurelia-gallery');
+    formData.append('file',           file);
+    formData.append('upload_preset',  cfg.cloudinaryUploadPreset);
+    formData.append('folder',         'aurelia-gallery');
 
     const cdnRes = await fetch(
       `https://api.cloudinary.com/v1_1/${cfg.cloudinaryCloudName}/image/upload`,
@@ -384,5 +389,37 @@ export async function adminFetchReviews() {
   return sb.authQuery('reviews?order=created_at.desc');
 }
 
-// Export getConfig for pages that need the Google Review URL
+/**
+ * adminFetchAnalytics()
+ * Fetches all reservations for analytics computation.
+ */
+export async function adminFetchAnalytics() {
+  try {
+    return await sb.authQuery('reservations?order=created_at.desc') || [];
+  } catch (err) {
+    console.error('[adminFetchAnalytics]', err);
+    return [];
+  }
+}
+
+/**
+ * sendCustomerEmail()
+ * Calls the serverless /api/notify endpoint.
+ * Falls back gracefully if serverless is unavailable.
+ */
+export async function sendCustomerEmail(reservation, updateType, reason = '') {
+  try {
+    const res = await fetch('/api/notify', {
+      method:  'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body:    JSON.stringify({ reservation, updateType, reason }),
+    });
+    if (!res.ok) throw new Error('Notify endpoint error');
+    return { ok: true };
+  } catch {
+    // Email is best-effort; don't block UI
+    return { ok: false };
+  }
+}
+
 export { getConfig };
