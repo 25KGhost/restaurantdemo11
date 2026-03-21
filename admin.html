@@ -17,18 +17,48 @@
       <h1 class="login-logo glow-text">AURELIA</h1>
       <p class="subtitle" style="text-align:center;margin-bottom:2rem">Admin Portal</p>
       <form id="login-form">
+        <!-- Honeypot -->
         <input type="text" name="website" style="display:none" tabindex="-1" autocomplete="off">
         <div class="form-group">
           <label>Email</label>
-          <input type="email" id="admin-email" class="custom-input" required placeholder="admin@aurelia.com">
+          <input type="email" id="admin-email" class="custom-input" required placeholder="admin@aurelia.com" autocomplete="email">
         </div>
         <div class="form-group mt-2">
           <label>Password</label>
-          <input type="password" id="admin-password" class="custom-input" required placeholder="••••••••">
+          <input type="password" id="admin-password" class="custom-input" required placeholder="••••••••" autocomplete="current-password">
+        </div>
+        <!-- Password strength indicator (visible on focus) -->
+        <div id="pw-strength-wrap" style="display:none;margin-top:0.5rem">
+          <div style="height:2px;background:rgba(255,255,255,0.06);border-radius:2px;overflow:hidden">
+            <div id="pw-strength-bar" style="height:100%;width:0;border-radius:2px;transition:all 0.3s"></div>
+          </div>
+          <p id="pw-strength-label" style="font-size:0.7rem;color:var(--clr-text-muted);margin-top:0.4rem"></p>
         </div>
         <p class="form-error" id="login-error"></p>
+        <!-- 2FA section (shown after credentials verified) -->
+        <div class="login-2fa-wrap" id="two-fa-wrap" style="display:none">
+          <span class="login-2fa-label">Enter 6-digit authentication code</span>
+          <div class="otp-inputs" id="otp-inputs">
+            <input type="text" maxlength="1" inputmode="numeric" pattern="[0-9]" class="otp-digit" aria-label="Digit 1">
+            <input type="text" maxlength="1" inputmode="numeric" pattern="[0-9]" class="otp-digit" aria-label="Digit 2">
+            <input type="text" maxlength="1" inputmode="numeric" pattern="[0-9]" class="otp-digit" aria-label="Digit 3">
+            <input type="text" maxlength="1" inputmode="numeric" pattern="[0-9]" class="otp-digit" aria-label="Digit 4">
+            <input type="text" maxlength="1" inputmode="numeric" pattern="[0-9]" class="otp-digit" aria-label="Digit 5">
+            <input type="text" maxlength="1" inputmode="numeric" pattern="[0-9]" class="otp-digit" aria-label="Digit 6">
+          </div>
+          <p class="form-error" id="otp-error" style="margin-top:0.8rem"></p>
+        </div>
         <button type="submit" class="btn-primary w-100 mt-3" id="login-btn">Sign In</button>
+        <a class="forgot-link" id="forgot-pw-link">Forgot password?</a>
       </form>
+      <div id="forgot-pw-wrap" style="display:none;margin-top:1.5rem;padding-top:1.5rem;border-top:1px solid rgba(255,255,255,0.05)">
+        <p style="font-size:0.82rem;color:var(--clr-text-muted);margin-bottom:1rem">Enter your admin email to receive a reset link.</p>
+        <div style="display:flex;gap:0.8rem">
+          <input type="email" id="reset-email" class="custom-input" placeholder="admin@aurelia.com" style="flex:1">
+          <button class="btn-primary" id="send-reset-btn" style="white-space:nowrap;padding:0.75rem 1.2rem">Send Link</button>
+        </div>
+        <p id="reset-msg" style="font-size:0.8rem;margin-top:0.7rem;min-height:1em"></p>
+      </div>
     </div>
   </div>
 
@@ -40,27 +70,52 @@
         <small>Admin</small>
       </div>
       <nav class="sidebar-nav">
-        <button class="sidebar-link active" data-section="reservations">Reservations</button>
-        <button class="sidebar-link" data-section="analytics">Analytics</button>
-        <button class="sidebar-link" data-section="menu">Menu Manager</button>
-        <button class="sidebar-link" data-section="gallery">Gallery</button>
-        <button class="sidebar-link" data-section="subscribers">Newsletter</button>
-        <button class="sidebar-link" data-section="reviews">Reviews</button>
+        <button class="sidebar-link active" data-section="reservations">
+          <span class="nav-icon">◈</span>Reservations
+        </button>
+        <button class="sidebar-link" data-section="analytics">
+          <span class="nav-icon">◉</span>Analytics
+        </button>
+        <div class="sidebar-divider"></div>
+        <button class="sidebar-link" data-section="menu">
+          <span class="nav-icon">◇</span>Menu Manager
+        </button>
+        <button class="sidebar-link" data-section="gallery">
+          <span class="nav-icon">◻</span>Gallery
+        </button>
+        <div class="sidebar-divider"></div>
+        <button class="sidebar-link" data-section="subscribers">
+          <span class="nav-icon">◎</span>Newsletter
+        </button>
+        <button class="sidebar-link" data-section="reviews">
+          <span class="nav-icon">★</span>Reviews
+        </button>
       </nav>
-      <button class="btn-secondary sidebar-logout" id="logout-btn">Sign Out</button>
+      <!-- Session timer -->
+      <div class="session-timer" id="session-timer">
+        <span class="timer-dot"></span>
+        <span id="session-timer-label">Session active</span>
+      </div>
+      <div class="sidebar-divider" style="margin-top:0.8rem"></div>
+      <button class="sidebar-logout" id="logout-btn">
+        <span style="font-size:0.85rem">↩</span> Sign Out
+      </button>
     </aside>
 
     <main class="admin-main">
       <header class="admin-header">
         <div>
           <h2 class="admin-section-title" id="section-title">Reservations</h2>
-          <p class="admin-section-sub" id="section-sub">Manage incoming table requests</p>
+          <p class="admin-section-sub" id="section-sub">Manage table bookings and guest arrivals</p>
         </div>
         <div id="header-actions"></div>
       </header>
 
       <!-- ── RESERVATIONS ── -->
       <section id="section-reservations" class="admin-section active">
+        <!-- Detail Panel (hidden by default, shown on "More Details") -->
+        <div id="res-detail-panel" style="display:none"></div>
+
         <div class="admin-filters">
           <button class="filter-btn active" data-filter="all">All</button>
           <button class="filter-btn" data-filter="confirmed">Confirmed</button>
@@ -84,16 +139,21 @@
 
       <!-- ── MENU MANAGER ── -->
       <section id="section-menu" class="admin-section">
-        <div class="admin-toolbar">
+        <div class="admin-toolbar" style="flex-wrap:wrap;gap:1rem">
           <button class="btn-primary" id="add-item-btn">+ Add Item</button>
+          <button class="btn-secondary" id="add-subcategory-btn">+ Add Subcategory</button>
         </div>
-        <div id="menu-form-wrap" class="admin-form-panel glass-panel" style="display:none">
+        <div id="menu-form-wrap" class="admin-form-panel" style="display:none">
           <h3 id="menu-form-title">Add Menu Item</h3>
           <form id="menu-item-form">
             <div class="admin-grid-2">
               <div class="form-group">
                 <label>Name</label>
                 <input type="text" id="mi-name" class="custom-input" required maxlength="100">
+              </div>
+              <div class="form-group">
+                <label>Subcategory</label>
+                <select id="mi-subcategory" class="custom-input" required></select>
               </div>
               <div class="form-group">
                 <label>Category</label>
@@ -115,6 +175,10 @@
                   <option value="false">No</option>
                 </select>
               </div>
+              <div class="form-group">
+                <label>Image URL <span style="font-size:0.65rem;text-transform:none;letter-spacing:0">(optional)</span></label>
+                <input type="url" id="mi-image" class="custom-input" placeholder="https://…" maxlength="500">
+              </div>
             </div>
             <div class="form-group mt-2">
               <label>Description</label>
@@ -127,6 +191,24 @@
             </div>
           </form>
         </div>
+
+        <!-- Subcategory form -->
+        <div id="subcategory-form-wrap" class="admin-form-panel" style="display:none">
+          <h3>Add Subcategory</h3>
+          <div class="admin-grid-2">
+            <div class="form-group">
+              <label>Subcategory Name</label>
+              <input type="text" id="sc-name" class="custom-input" maxlength="60" placeholder="e.g. Tasting Menu">
+            </div>
+            <div class="form-group" style="justify-content:flex-end">
+              <div class="admin-grid-2">
+                <button class="btn-secondary" id="cancel-sc-form">Cancel</button>
+                <button class="btn-primary" id="save-sc-btn">Add</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
         <div id="menu-table-wrap"><p class="loading-msg">Loading menu items…</p></div>
       </section>
 
@@ -163,9 +245,9 @@
   </div>
 
   <!-- ── CANCEL REASON MODAL ── -->
-  <div id="cancel-modal" style="display:none;position:fixed;inset:0;z-index:9000;background:rgba(0,0,0,0.7);backdrop-filter:blur(8px);display:none;align-items:center;justify-content:center">
-    <div class="admin-form-panel glass-panel" style="max-width:480px;width:90%;margin:0">
-      <h3 style="font-size:1.4rem;margin-bottom:1.5rem">Cancel Reservation</h3>
+  <div id="cancel-modal" class="admin-modal">
+    <div class="admin-form-panel">
+      <h3 style="font-size:1.3rem;margin-bottom:1.5rem">Cancel Reservation</h3>
       <div class="form-group">
         <label>Reason for Cancellation</label>
         <textarea id="cancel-reason-input" class="custom-input" rows="3" placeholder="Please provide a reason that will be sent to the guest…" maxlength="500"></textarea>
@@ -173,15 +255,15 @@
       <p class="form-error" id="cancel-error"></p>
       <div class="admin-grid-2 mt-3">
         <button class="btn-secondary" id="cancel-modal-dismiss">Back</button>
-        <button class="btn-primary" id="cancel-modal-confirm" style="background:rgba(229,57,53,0.2);color:#ef9a9a;border-color:rgba(229,57,53,0.3)">Confirm Cancel</button>
+        <button class="btn-primary" id="cancel-modal-confirm" style="background:rgba(229,57,53,0.18);color:#ef9a9a;border:1px solid rgba(229,57,53,0.3)">Confirm Cancel</button>
       </div>
     </div>
   </div>
 
   <!-- ── CHANGE TIME MODAL ── -->
-  <div id="time-change-modal" style="display:none;position:fixed;inset:0;z-index:9000;background:rgba(0,0,0,0.7);backdrop-filter:blur(8px);align-items:center;justify-content:center">
-    <div class="admin-form-panel glass-panel" style="max-width:480px;width:90%;margin:0">
-      <h3 style="font-size:1.4rem;margin-bottom:1.5rem">Change Reservation Time</h3>
+  <div id="time-change-modal" class="admin-modal">
+    <div class="admin-form-panel">
+      <h3 style="font-size:1.3rem;margin-bottom:1.5rem">Change Reservation Time</h3>
       <div class="admin-grid-2">
         <div class="form-group">
           <label>New Date</label>
@@ -206,6 +288,20 @@
       <div class="admin-grid-2 mt-3">
         <button class="btn-secondary" id="time-modal-dismiss">Cancel</button>
         <button class="btn-primary" id="time-modal-confirm">Confirm Change</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── DELETE SUBCATEGORY CONFIRM ── -->
+  <div id="delete-sc-modal" class="admin-modal">
+    <div class="admin-form-panel">
+      <h3 style="font-size:1.3rem;margin-bottom:1rem">Delete Subcategory</h3>
+      <p style="color:var(--clr-text-muted);font-size:0.9rem;line-height:1.6;margin-bottom:1.5rem">
+        Items in this subcategory will be flagged <strong style="color:#ffb74d">Must Update</strong> and hidden from guests until reassigned to another subcategory.
+      </p>
+      <div class="admin-grid-2">
+        <button class="btn-secondary" id="delete-sc-dismiss">Cancel</button>
+        <button class="btn-primary" id="delete-sc-confirm" style="background:rgba(229,57,53,0.18);color:#ef9a9a;border:1px solid rgba(229,57,53,0.3)">Delete</button>
       </div>
     </div>
   </div>
