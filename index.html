@@ -3,76 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="VÉRITÉ | The absolute pinnacle of modern gastronomy. Uncompromising precision and the pure essence of taste.">
-    <meta property="og:title" content="VÉRITÉ | High-End Gastronomy">
-    <meta property="og:description" content="Experience uncompromising culinary precision in an intimate, brutalist-inspired setting.">
+    <meta name="description" content="A Michelin-starred culinary experience. Unforgettable fine dining, exquisite ingredients, and timeless luxury.">
+    <meta property="og:title" content="AURELIA | Fine Dining">
+    <meta property="og:description" content="Experience high-end European fine dining in an intimate, timeless setting.">
     <meta property="og:type" content="website">
-    <title>VÉRITÉ | Modern Gastronomy</title>
+    <title>AURELIA | Fine Dining & Luxury Hospitality</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
 
     <link rel="stylesheet" href="styles.css">
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🔪</text></svg>">
-
-    <style>
-        :root {
-            --clr-bg-dark: #050505;
-            --clr-bg-surface: #111111;
-            --clr-text-main: #f5f5f7;
-            --clr-text-muted: #86868b;
-            --clr-accent: #d4af37; /* Champagne Gold */
-            --clr-accent-glow: rgba(212, 175, 55, 0.3);
-            --font-heading: 'Playfair Display', serif;
-            --font-body: 'Inter', sans-serif;
-        }
-
-        body {
-            background-color: var(--clr-bg-dark);
-            color: var(--clr-text-main);
-            font-family: var(--font-body);
-        }
-
-        h1, h2, h3, .title, .section-title, .nav-logo {
-            font-family: var(--font-heading);
-            letter-spacing: -0.02em;
-        }
-
-        .glow-text {
-            color: var(--clr-accent);
-            text-shadow: 0 0 30px var(--clr-accent-glow);
-        }
-
-        .btn-primary {
-            background-color: var(--clr-text-main);
-            color: var(--clr-bg-dark);
-            border-radius: 4px;
-            font-weight: 500;
-            transition: all 0.3s ease;
-        }
-
-        .btn-primary:hover {
-            background-color: var(--clr-accent);
-            box-shadow: 0 0 15px var(--clr-accent-glow);
-        }
-
-        .btn-secondary {
-            border: 1px solid var(--clr-text-muted);
-            color: var(--clr-text-main);
-            border-radius: 4px;
-        }
-
-        .glass-panel {
-            background: rgba(255, 255, 255, 0.02);
-            backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-        }
-        
-        .ambient-background {
-            background: radial-gradient(circle at 50% 0%, #1a1a1a 0%, #050505 70%);
-        }
-    </style>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🍽️</text></svg>">
 </head>
 <body class="loading">
     <div class="ambient-background"></div>
@@ -80,57 +22,57 @@
     <div class="cursor-outline"></div>
 
     <div id="loader">
-        <h1 class="loader-logo" style="letter-spacing: 0.2em;">VÉRITÉ</h1>
+        <h1 class="loader-logo">AURELIA</h1>
         <div class="loader-line"></div>
     </div>
 
     <nav id="navbar">
         <div class="nav-container">
-            <a href="#home" class="nav-logo route-link" style="letter-spacing: 0.1em;">VÉRITÉ</a>
+            <a href="#home" class="nav-logo route-link">AURELIA</a>
             <div class="nav-links">
                 <a href="#home"         class="route-link active">Home</a>
                 <a href="#menu"         class="route-link">Menu</a>
                 <a href="#sensory"      class="route-link">The Canvas</a>
-                <a href="#about"        class="route-link">Philosophy</a>
+                <a href="#about"        class="route-link">About</a>
                 <a href="#gallery"      class="route-link">Gallery</a>
                 <a href="#contact"      class="route-link">Contact</a>
             </div>
-            <a href="#reservations" class="btn-primary nav-cta route-link">Reserve</a>
+            <a href="#reservations" class="btn-primary nav-cta route-link">Reserve a Table</a>
             <div class="menu-toggle"><span></span><span></span></div>
         </div>
     </nav>
 
     <main id="app-root">
 
+        <!-- HOME -->
         <section id="home" class="page-view active">
             <header class="hero">
                 <div class="hero-bg">
-                    <img src="https://images.unsplash.com/photo-1514933651103-005eec06c04b?q=80&w=2074&auto=format&fit=crop" alt="Vérité Dark Interior" loading="lazy">
+                    <img src="https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?q=80&w=2070&auto=format&fit=crop" alt="Luxurious Restaurant Interior" loading="lazy">
                 </div>
                 <div class="hero-content reveal-on-scroll">
-                    <span class="subtitle" style="text-transform: uppercase; letter-spacing: 0.15em; color: var(--clr-text-muted); font-size: 0.85rem;">Uncompromising Precision</span>
-                    <h1 class="title glow-text" style="font-size: clamp(4rem, 8vw, 7rem); line-height: 1.1;">Taste,<br>Distilled.</h1>
-                    <p style="max-width: 400px; margin: 1.5rem auto; color: var(--clr-text-muted);">Stripping away the superfluous to reveal the pure, unadulterated essence of modern gastronomy.</p>
-                    <div class="hero-actions" style="margin-top: 2rem;">
-                        <a href="#reservations" class="btn-primary route-link">Secure a Table</a>
-                        <a href="#menu"         class="btn-secondary route-link">View the Menu</a>
+                    <span class="subtitle">A Michelin-Starred Experience</span>
+                    <h1 class="title glow-text">Culinary Artistry,<br>Refined.</h1>
+                    <div class="hero-actions">
+                        <a href="#reservations" class="btn-primary route-link">Reserve a Table</a>
+                        <a href="#menu"         class="btn-secondary route-link">Discover Menu</a>
                     </div>
                 </div>
                 <div class="scroll-indicator">
-                    <span style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em;">Descend</span>
-                    <div class="line" style="background: var(--clr-accent);"></div>
+                    <span>Explore</span>
+                    <div class="line"></div>
                 </div>
             </header>
 
             <section class="section-padding about-preview">
-                <div class="container grid-2 align-center">
+                <div class="container grid-2">
                     <div class="editorial-text reveal-on-scroll">
-                        <h2 class="section-title">The Pursuit of Absolute Perfection.</h2>
-                        <p style="color: var(--clr-text-muted); line-height: 1.8;">We do not cook; we engineer flavor. At Vérité, the line between culinary science and artistry is erased. Every element on the plate is subjected to rigorous refinement, ensuring that only truth remains.</p>
-                        <a href="#about" class="link-arrow route-link" style="color: var(--clr-text-main); font-weight: 500;">Read the Manifesto &rarr;</a>
+                        <h2 class="section-title">A Symphony of Taste</h2>
+                        <p>At Aurelia, we blur the line between gastronomy and art. Every dish is a meticulously crafted narrative, honoring seasonal ingredients sourced from boutique European farms.</p>
+                        <a href="#about" class="link-arrow route-link">Our Philosophy &rarr;</a>
                     </div>
                     <div class="editorial-image reveal-on-scroll delay-1 relative-glow">
-                        <img src="https://images.unsplash.com/photo-1588166524941-3bf61a9c41db?q=80&w=1584&auto=format&fit=crop" alt="Minimalist Plating" loading="lazy">
+                        <img src="https://images.unsplash.com/photo-1550966871-3ed3cdb5ed0c?q=80&w=2070&auto=format&fit=crop" alt="Plated Dish" loading="lazy">
                     </div>
                 </div>
             </section>
@@ -138,645 +80,354 @@
             <section class="section-padding glass-panel signature-dishes">
                 <div class="container">
                     <div class="section-header center reveal-on-scroll">
-                        <span class="subtitle" style="color: var(--clr-text-muted);">The Foundation</span>
-                        <h2 class="section-title">Defining Elements</h2>
+                        <span class="subtitle">The Classics</span>
+                        <h2 class="section-title">Signature Creations</h2>
                     </div>
                     <div class="grid-3">
-                        <div class="card reveal-on-scroll delay-1" style="background: var(--clr-bg-dark); border: 1px solid rgba(255,255,255,0.05);">
-                            <div class="card-img"><img src="https://images.unsplash.com/photo-1544025162-83b63cc33454?q=80&w=1740&auto=format&fit=crop" alt="Charcoal Beef" loading="lazy"></div>
-                            <div class="card-content"><h3>A5 &amp; Charcoal</h3><p style="color: var(--clr-text-muted); font-size: 0.9rem;">Kagoshima Wagyu, binchotan smoke, black garlic emulsion, aged ponzu.</p></div>
+                        <div class="card reveal-on-scroll delay-1">
+                            <div class="card-img"><img src="https://images.unsplash.com/photo-1600891964092-4316c288032e?q=80&w=1740&auto=format&fit=crop" alt="Wagyu Beef" loading="lazy"></div>
+                            <div class="card-content"><h3>A5 Wagyu &amp; Truffle</h3><p>Smoked celeriac puree, black winter truffle, bordelaise reduction.</p></div>
                         </div>
-                        <div class="card reveal-on-scroll delay-2" style="background: var(--clr-bg-dark); border: 1px solid rgba(255,255,255,0.05);">
-                            <div class="card-img"><img src="https://images.unsplash.com/photo-1599813959371-332eb1e42b26?q=80&w=1740&auto=format&fit=crop" alt="Cured Fish" loading="lazy"></div>
-                            <div class="card-content"><h3>Zero-Degree Toro</h3><p style="color: var(--clr-text-muted); font-size: 0.9rem;">Dry-aged bluefin, frozen dashi, white soy, micro-cilantro.</p></div>
+                        <div class="card reveal-on-scroll delay-2">
+                            <div class="card-img"><img src="https://images.unsplash.com/photo-1515516969-d4008cc6241a?q=80&w=1587&auto=format&fit=crop" alt="Scallop Crudo" loading="lazy"></div>
+                            <div class="card-content"><h3>Hokkaido Scallop Crudo</h3><p>Citrus caviar, fermented chili, compressed cucumber, dashi snow.</p></div>
                         </div>
-                        <div class="card reveal-on-scroll delay-3" style="background: var(--clr-bg-dark); border: 1px solid rgba(255,255,255,0.05);">
-                            <div class="card-img"><img src="https://images.unsplash.com/photo-1504670073073-6123e39e0754?q=80&w=1740&auto=format&fit=crop" alt="Abstract Dessert" loading="lazy"></div>
-                            <div class="card-content"><h3>Obsidian Cacao</h3><p style="color: var(--clr-text-muted); font-size: 0.9rem;">72% single-origin cacao, smoked vanilla bean, activated charcoal tuile.</p></div>
+                        <div class="card reveal-on-scroll delay-3">
+                            <div class="card-img"><img src="https://images.unsplash.com/photo-1504670073073-6123e39e0754?q=80&w=1740&auto=format&fit=crop" alt="Golden Dessert" loading="lazy"></div>
+                            <div class="card-content"><h3>Valrhona Textures</h3><p>Dark chocolate ganache, hazelnut praline, 24k gold leaf.</p></div>
                         </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="section-padding awards-section">
+                <div class="container center reveal-on-scroll">
+                    <div class="awards-grid">
+                        <div class="award-item">★ ★ ★<br>Michelin Guide 2026</div>
+                        <div class="award-item">"World's 50 Best"<br>Ranked #12</div>
+                        <div class="award-item glow-text">"A masterclass in flavor."<br>— The New York Times</div>
+                        <div class="award-item">James Beard Award<br>Outstanding Chef</div>
                     </div>
                 </div>
             </section>
         </section>
 
+        <!-- MENU -->
         <section id="menu" class="page-view">
-            <header class="page-header dark-bg" style="border-bottom: 1px solid rgba(255,255,255,0.05);">
-                <h1 class="title reveal-on-scroll glow-text">The Index</h1>
-                <p class="subtitle reveal-on-scroll delay-1" style="color: var(--clr-text-muted);">An orchestrated progression of 14 minimal sequences.</p>
+            <header class="page-header dark-bg">
+                <h1 class="title reveal-on-scroll glow-text">The Menu</h1>
+                <p class="subtitle reveal-on-scroll delay-1">A tasting journey of land and sea.</p>
             </header>
             <section class="menu-container container section-padding">
                 <div class="menu-nav reveal-on-scroll">
-                    <button class="active" data-tab="tasting">Omakase Sequence</button>
-                    <button data-tab="wine">Liquid Architecture</button>
+                    <button class="active" data-tab="tasting">Tasting Menu</button>
+                    <button data-tab="alacarte">A La Carte</button>
+                    <button data-tab="wine">Wine Pairings</button>
                 </div>
                 <div class="menu-content active" id="menu-tasting">
                     <div class="menu-section reveal-on-scroll">
-                        <h3 class="menu-category" style="color: var(--clr-accent);">Sequence 01: Depth</h3>
+                        <h3 class="menu-category">Act I: The Sea</h3>
                         <div class="menu-item">
-                            <div class="menu-item-header"><h4>Beluga Caviar &amp; Bone Marrow</h4></div>
-                            <p style="color: var(--clr-text-muted);">Warm brioche essence, sea salt, chive vapor.</p>
+                            <div class="menu-item-header"><h4>Osetra Caviar Tartlet</h4><span class="price">$45</span></div>
+                            <p>Crème fraîche, cured egg yolk, chive oil.</p>
                         </div>
                         <div class="menu-item">
-                            <div class="menu-item-header"><h4>Smoked Eel Tart</h4></div>
-                            <p style="color: var(--clr-text-muted);">Granny Smith apple, horseradish snow, dill.</p>
+                            <div class="menu-item-header"><h4>Bluefin Tuna Otoro</h4><span class="price">$52</span></div>
+                            <p>White soy, finger lime, puffed wild rice.</p>
                         </div>
                     </div>
                     <div class="menu-section reveal-on-scroll delay-1">
-                        <h3 class="menu-category" style="color: var(--clr-accent);">Sequence 02: Earth</h3>
-                        <div class="menu-item highlight relative-glow" style="border-left: 2px solid var(--clr-accent); padding-left: 1rem;">
-                            <div class="menu-item-header"><h4>Dry-Aged Venison</h4></div>
-                            <p style="color: var(--clr-text-muted);">Juniper reduction, fermented blackberry, charred maitake.</p>
+                        <h3 class="menu-category">Act II: The Land</h3>
+                        <div class="menu-item highlight relative-glow">
+                            <div class="menu-item-header"><h4>Dry-Aged Squab</h4><span class="price">$78</span></div>
+                            <p>Blackberry gastrique, charred radicchio, foie gras jus.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="menu-content" id="menu-alacarte">
+                    <div class="menu-section reveal-on-scroll">
+                        <h3 class="menu-category">Mains</h3>
+                        <div class="menu-item">
+                            <div class="menu-item-header"><h4>Butter-Poached Lobster</h4><span class="price">$85</span></div>
+                            <p>Saffron risotto, sea urchin emulsion, fennel pollen.</p>
                         </div>
                     </div>
                 </div>
                 <div class="menu-content" id="menu-wine">
                     <div class="menu-section reveal-on-scroll">
-                        <h3 class="menu-category" style="color: var(--clr-accent);">Curated Pairings</h3>
+                        <h3 class="menu-category">Sommelier Selection</h3>
                         <div class="menu-item">
-                            <div class="menu-item-header"><h4>Château Haut-Brion, Pessac-Léognan 2005</h4></div>
-                            <p style="color: var(--clr-text-muted);">Tobacco, dark plum, and crushed gravel mechanics.</p>
+                            <div class="menu-item-header"><h4>Domaine de la Romanée-Conti, 2014</h4><span class="price">$450 / gls</span></div>
+                            <p>Notes of dark cherry, crushed violet, and forest floor.</p>
                         </div>
                     </div>
                 </div>
             </section>
         </section>
 
+        <!-- SENSORY -->
         <section id="sensory" class="page-view">
             <header class="page-header dark-bg">
-                <h1 class="title reveal-on-scroll glow-text">Flavor Mechanics</h1>
-                <p class="subtitle reveal-on-scroll delay-1" style="color: var(--clr-text-muted);">Interact to reveal the hidden chemistry behind our signatures.</p>
+                <h1 class="title reveal-on-scroll glow-text">The Sensory Canvas</h1>
+                <p class="subtitle reveal-on-scroll delay-1">Hover to discover the alchemy behind our pairings.</p>
             </header>
             <div class="sensory-container container section-padding">
                 <div class="sensory-grid reveal-on-scroll">
-                    <div class="sensory-card" data-aura="rgba(212, 175, 55, 0.1)">
-                        <div class="sensory-bg" style="background-image: url('https://images.unsplash.com/photo-1544025162-83b63cc33454?q=80&w=1740&auto=format&fit=crop'); filter: grayscale(100%) contrast(1.2);"></div>
-                        <div class="sensory-content"><h3 style="color: var(--clr-text-main);">Maillard Reaction</h3><p class="hidden-desc" style="color: var(--clr-text-muted);">The exact 180°C sear required to transform A5 Wagyu fat into a caramelized, umami-rich crust.</p></div>
+                    <div class="sensory-card" data-aura="rgba(197, 160, 89, 0.15)">
+                        <div class="sensory-bg" style="background-image: url('https://images.unsplash.com/photo-1600891964092-4316c288032e?q=80&w=1740&auto=format&fit=crop');"></div>
+                        <div class="sensory-content"><h3>Earth &amp; Smoke</h3><p class="hidden-desc">Black Winter Truffle meets A5 Wagyu. Paired with a robust 2010 Barolo.</p></div>
                     </div>
-                    <div class="sensory-card" data-aura="rgba(255, 255, 255, 0.05)">
-                        <div class="sensory-bg" style="background-image: url('https://images.unsplash.com/photo-1599813959371-332eb1e42b26?q=80&w=1740&auto=format&fit=crop'); filter: grayscale(100%) contrast(1.2);"></div>
-                        <div class="sensory-content"><h3 style="color: var(--clr-text-main);">Cryo-Extraction</h3><p class="hidden-desc" style="color: var(--clr-text-muted);">Freezing tomatoes at -40°C to extract a completely clear, intensely flavored essence water.</p></div>
+                    <div class="sensory-card" data-aura="rgba(100, 149, 237, 0.1)">
+                        <div class="sensory-bg" style="background-image: url('https://images.unsplash.com/photo-1515516969-d4008cc6241a?q=80&w=1587&auto=format&fit=crop');"></div>
+                        <div class="sensory-content"><h3>Oceanic Brine</h3><p class="hidden-desc">Hokkaido Scallop and Citrus Caviar. Awakened by a crisp Chablis Grand Cru.</p></div>
                     </div>
-                    <div class="sensory-card" data-aura="rgba(100, 100, 100, 0.2)">
-                        <div class="sensory-bg" style="background-image: url('https://images.unsplash.com/photo-1504670073073-6123e39e0754?q=80&w=1740&auto=format&fit=crop'); filter: grayscale(100%) contrast(1.2);"></div>
-                        <div class="sensory-content"><h3 style="color: var(--clr-text-main);">Fermentation</h3><p class="hidden-desc" style="color: var(--clr-text-muted);">A 14-day lacto-fermentation process that introduces complex acidity to raw cacao.</p></div>
+                    <div class="sensory-card" data-aura="rgba(139, 0, 0, 0.15)">
+                        <div class="sensory-bg" style="background-image: url('https://images.unsplash.com/photo-1504670073073-6123e39e0754?q=80&w=1740&auto=format&fit=crop');"></div>
+                        <div class="sensory-content"><h3>Velvet Cocoa</h3><p class="hidden-desc">Valrhona Dark Chocolate layered with hazelnut. Harmonized with aged Tawny Port.</p></div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <section id="reservations" class="page-view section-padding" style="background: var(--clr-bg-dark);">
-            <style>
-                /* Scoped styles for the new reservation UI */
-                .res-ui-wrapper {
-                    display: flex;
-                    flex-direction: column;
-                    gap: 2rem;
-                    max-width: 1000px;
-                    margin: 0 auto;
-                    font-family: var(--font-body);
-                }
+        <!-- RESERVATIONS -->
+        <section id="reservations" class="page-view">
+            <div class="grid-2 full-height">
+                <div class="reservation-image relative-glow">
+                    <img src="https://images.unsplash.com/photo-1544148103-0773bf10d330?q=80&w=1740&auto=format&fit=crop" alt="Table Setting" loading="lazy">
+                </div>
+                <div class="reservation-form-container section-padding glass-panel">
+                    <div class="reveal-on-scroll">
+                        <h1 class="title glow-text">Reservations</h1>
+                        <p class="scarcity-text mb-4">Limited seating available. A refined experience awaits.</p>
 
-                @media (min-width: 900px) {
-                    .res-ui-wrapper {
-                        flex-direction: row;
-                        align-items: flex-start;
-                    }
-                }
+                        <form id="booking-form" class="booking-form">
+                            <!-- Honeypot -->
+                            <input type="text" name="website" style="display:none" tabindex="-1" autocomplete="off">
 
-                .res-card {
-                    background: #111111; /* Matching the dark card bg */
-                    border: 1px solid rgba(255, 255, 255, 0.05);
-                    border-radius: 12px;
-                    padding: 2rem;
-                    box-shadow: 0 10px 40px rgba(0,0,0,0.5);
-                }
-
-                .res-left-panel {
-                    flex: 1.8;
-                }
-
-                .res-right-panel {
-                    flex: 1;
-                    position: sticky;
-                    top: 100px;
-                }
-
-                /* Left Panel: Header */
-                .res-header {
-                    display: flex;
-                    align-items: center;
-                    gap: 1rem;
-                    margin-bottom: 2rem;
-                }
-
-                .step-circle {
-                    width: 30px;
-                    height: 30px;
-                    border-radius: 50%;
-                    background: white;
-                    color: black;
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
-                    font-weight: 600;
-                    font-size: 0.9rem;
-                }
-
-                .res-header h2 {
-                    font-family: var(--font-heading);
-                    font-size: 1.5rem;
-                    margin: 0;
-                }
-
-                /* Left Panel: Grid (Calendar + Times) */
-                .res-interactive-area {
-                    display: grid;
-                    grid-template-columns: 1fr;
-                    gap: 3rem;
-                }
-
-                @media (min-width: 600px) {
-                    .res-interactive-area {
-                        grid-template-columns: 1fr 1fr;
-                    }
-                }
-
-                /* Calendar Component */
-                .calendar-wrapper {
-                    background: #0a0a0a;
-                    border-radius: 8px;
-                    padding: 1.5rem;
-                    border: 1px solid rgba(255, 255, 255, 0.03);
-                }
-
-                .calendar-nav {
-                    display: flex;
-                    justify-content: space-between;
-                    align-items: center;
-                    margin-bottom: 1.5rem;
-                    font-size: 0.9rem;
-                    font-weight: 500;
-                }
-
-                .calendar-nav button {
-                    background: transparent;
-                    border: none;
-                    color: var(--clr-text-muted);
-                    cursor: pointer;
-                    font-size: 1.2rem;
-                    transition: color 0.3s;
-                }
-
-                .calendar-nav button:hover { color: white; }
-
-                .calendar-grid {
-                    display: grid;
-                    grid-template-columns: repeat(7, 1fr);
-                    gap: 0.5rem;
-                    text-align: center;
-                }
-
-                .day-name {
-                    color: var(--clr-text-muted);
-                    font-size: 0.75rem;
-                    text-transform: uppercase;
-                    margin-bottom: 0.5rem;
-                }
-
-                .day-number {
-                    aspect-ratio: 1;
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
-                    font-size: 0.85rem;
-                    cursor: pointer;
-                    border-radius: 4px;
-                    color: var(--clr-text-main);
-                    transition: all 0.2s ease;
-                }
-
-                .day-number.prev-month { color: #333; cursor: default; }
-                .day-number:not(.prev-month):hover { background: rgba(255,255,255,0.1); }
-                .day-number.selected {
-                    background: rgba(255,255,255,0.15);
-                    font-weight: 600;
-                    border: 1px solid rgba(255,255,255,0.3);
-                }
-
-                /* Time Slots Component */
-                .timeslot-section h3 {
-                    font-size: 0.75rem;
-                    text-transform: uppercase;
-                    letter-spacing: 0.05em;
-                    color: var(--clr-text-muted);
-                    margin-bottom: 1rem;
-                    font-family: var(--font-body);
-                }
-
-                .timeslot-grid {
-                    display: grid;
-                    grid-template-columns: repeat(3, 1fr);
-                    gap: 0.5rem;
-                }
-
-                .time-btn-outline {
-                    background: transparent;
-                    border: 1px solid rgba(255,255,255,0.1);
-                    color: var(--clr-text-muted);
-                    padding: 0.5rem 0;
-                    border-radius: 4px;
-                    font-size: 0.85rem;
-                    cursor: pointer;
-                    transition: all 0.2s;
-                    font-family: var(--font-body);
-                }
-
-                .time-btn-outline:hover {
-                    border-color: rgba(255,255,255,0.3);
-                    color: white;
-                }
-
-                .timeslot-footer-note {
-                    font-size: 0.75rem;
-                    color: var(--clr-text-muted);
-                    margin-top: 1.5rem;
-                    font-style: italic;
-                    text-align: center;
-                }
-
-                /* Right Panel: Summary */
-                .res-right-panel h2 {
-                    font-family: var(--font-heading);
-                    font-size: 1.3rem;
-                    margin-bottom: 1.5rem;
-                    margin-top: 0;
-                }
-
-                .summary-list {
-                    display: flex;
-                    flex-direction: column;
-                    gap: 1.5rem;
-                }
-
-                .summary-item {
-                    display: flex;
-                    align-items: flex-start;
-                    gap: 1rem;
-                }
-
-                .summary-icon {
-                    width: 36px;
-                    height: 36px;
-                    border-radius: 50%;
-                    background: #1a1a1a;
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
-                    border: 1px solid rgba(255,255,255,0.05);
-                }
-
-                .summary-icon svg {
-                    width: 16px;
-                    height: 16px;
-                    fill: none;
-                    stroke: var(--clr-text-muted);
-                    stroke-width: 2;
-                    stroke-linecap: round;
-                    stroke-linejoin: round;
-                }
-
-                .summary-details {
-                    display: flex;
-                    flex-direction: column;
-                    gap: 0.25rem;
-                }
-
-                .summary-label {
-                    font-size: 0.7rem;
-                    color: var(--clr-accent);
-                    text-transform: uppercase;
-                    letter-spacing: 0.1em;
-                    font-weight: 600;
-                }
-
-                .summary-value {
-                    font-size: 0.95rem;
-                    color: white;
-                    font-weight: 500;
-                }
-
-                .summary-note {
-                    margin-top: 2rem;
-                    padding: 1rem;
-                    background: rgba(255,255,255,0.03);
-                    border-radius: 6px;
-                    font-size: 0.75rem;
-                    color: var(--clr-text-muted);
-                    line-height: 1.5;
-                    border-left: 2px solid rgba(255,255,255,0.1);
-                }
-            </style>
-
-            <div class="container reveal-on-scroll">
-                <div class="res-ui-wrapper">
-                    
-                    <div class="res-card res-left-panel">
-                        <div class="res-header">
-                            <div class="step-circle">1</div>
-                            <h2>Date et Heure</h2>
-                        </div>
-                        
-                        <div class="res-interactive-area">
-                            <div class="calendar-wrapper">
-                                <div class="calendar-nav">
-                                    <button>&lsaquo;</button>
-                                    <span>mars 2026</span>
-                                    <button>&rsaquo;</button>
+                            <!-- Step 1: Date, Guests, Time -->
+                            <div class="form-step active" id="step-1">
+                                <div class="form-row grid-2">
+                                    <div class="form-group">
+                                        <label>Date</label>
+                                        <input type="date" id="res-date" required class="custom-input">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Guests</label>
+                                        <select id="res-guests" class="custom-input" required>
+                                            <option value="" disabled selected>Select party size</option>
+                                            <option value="1">1 Person</option>
+                                            <option value="2">2 People</option>
+                                            <option value="3">3 People</option>
+                                            <option value="4">4 People</option>
+                                            <option value="5">5 People</option>
+                                            <option value="6">6 People</option>
+                                            <option value="7">7 People</option>
+                                            <option value="8">8+ People (Contact Us)</option>
+                                        </select>
+                                    </div>
                                 </div>
-                                <div class="calendar-grid">
-                                    <div class="day-name">lu</div>
-                                    <div class="day-name">ma</div>
-                                    <div class="day-name">me</div>
-                                    <div class="day-name">je</div>
-                                    <div class="day-name">ve</div>
-                                    <div class="day-name">sa</div>
-                                    <div class="day-name">di</div>
-                                    
-                                    <div class="day-number prev-month">23</div>
-                                    <div class="day-number prev-month">24</div>
-                                    <div class="day-number prev-month">25</div>
-                                    <div class="day-number prev-month">26</div>
-                                    <div class="day-number prev-month">27</div>
-                                    <div class="day-number prev-month">28</div>
-                                    <div class="day-number">1</div>
-                                    
-                                    <div class="day-number">2</div>
-                                    <div class="day-number">3</div>
-                                    <div class="day-number">4</div>
-                                    <div class="day-number">5</div>
-                                    <div class="day-number">6</div>
-                                    <div class="day-number">7</div>
-                                    <div class="day-number">8</div>
-                                    
-                                    <div class="day-number">9</div>
-                                    <div class="day-number">10</div>
-                                    <div class="day-number">11</div>
-                                    <div class="day-number">12</div>
-                                    <div class="day-number">13</div>
-                                    <div class="day-number">14</div>
-                                    <div class="day-number">15</div>
-                                    
-                                    <div class="day-number">16</div>
-                                    <div class="day-number">17</div>
-                                    <div class="day-number">18</div>
-                                    <div class="day-number">19</div>
-                                    <div class="day-number">20</div>
-                                    <div class="day-number">21</div>
-                                    <div class="day-number">22</div>
-                                    
-                                    <div class="day-number">23</div>
-                                    <div class="day-number">24</div>
-                                    <div class="day-number">25</div>
-                                    <div class="day-number">26</div>
-                                    <div class="day-number">27</div>
-                                    <div class="day-number selected">28</div>
-                                    <div class="day-number">29</div>
-                                    
-                                    <div class="day-number">30</div>
-                                    <div class="day-number">31</div>
-                                    <div class="day-number prev-month">1</div>
-                                    <div class="day-number prev-month">2</div>
-                                    <div class="day-number prev-month">3</div>
-                                    <div class="day-number prev-month">4</div>
-                                    <div class="day-number prev-month">5</div>
+                                <div class="form-group">
+                                    <label>Experience</label>
+                                    <select id="res-experience" class="custom-input">
+                                        <option>Main Dining Room</option>
+                                        <option>Chef's Counter (Tasting Only)</option>
+                                        <option>The Glass Room (Private)</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label>Select Time</label>
+                                    <div class="time-slots" id="time-slots">
+                                        <button type="button" class="time-btn" data-time="17:30">5:30 PM</button>
+                                        <button type="button" class="time-btn" data-time="18:00">6:00 PM</button>
+                                        <button type="button" class="time-btn active" data-time="19:30">7:30 PM</button>
+                                        <button type="button" class="time-btn" data-time="20:00">8:00 PM</button>
+                                        <button type="button" class="time-btn" data-time="21:30">9:30 PM</button>
+                                    </div>
+                                </div>
+                                <p class="form-error" id="step1-error"></p>
+                                <button type="button" class="btn-primary w-100 mt-3" id="next-step-btn">Continue</button>
+                            </div>
+
+                            <!-- Step 2: Guest Details -->
+                            <div class="form-step" id="step-2" style="display:none">
+                                <div class="form-group">
+                                    <label>Full Name</label>
+                                    <input type="text" id="res-name" placeholder="Your name" required class="custom-input">
+                                </div>
+                                <div class="form-group mt-2">
+                                    <label>Email Address</label>
+                                    <input type="email" id="res-email" placeholder="Email" required class="custom-input">
+                                </div>
+                                <div class="form-group mt-2">
+                                    <label>Phone Number</label>
+                                    <input type="tel" id="res-phone" placeholder="+1 (212) 555-0000" required class="custom-input">
+                                </div>
+                                <div class="form-group mt-2">
+                                    <label>Dietary Restrictions / Special Occasion</label>
+                                    <textarea id="res-notes" placeholder="Allergies, anniversaries, special requests…" class="custom-input" rows="2"></textarea>
+                                </div>
+                                <p class="form-error" id="step2-error"></p>
+                                <div class="grid-2 mt-3">
+                                    <button type="button" class="btn-secondary" id="prev-step-btn">Back</button>
+                                    <button type="submit" class="btn-primary" id="submit-btn">Confirm Booking</button>
                                 </div>
                             </div>
 
-                            <div class="timeslot-section">
-                                <h3>Créneaux Disponibles</h3>
-                                <div class="timeslot-grid">
-                                    <button class="time-btn-outline">12:00</button>
-                                    <button class="time-btn-outline">12:30</button>
-                                    <button class="time-btn-outline">13:00</button>
-                                    <button class="time-btn-outline">13:30</button>
-                                    <button class="time-btn-outline">14:00</button>
-                                    <button class="time-btn-outline">14:30</button>
-                                    <button class="time-btn-outline">15:00</button>
-                                    <button class="time-btn-outline">15:30</button>
-                                    <button class="time-btn-outline">16:00</button>
-                                    <button class="time-btn-outline">16:30</button>
-                                    <button class="time-btn-outline">17:00</button>
-                                    <button class="time-btn-outline">17:30</button>
-                                    <button class="time-btn-outline">18:00</button>
-                                    <button class="time-btn-outline">18:30</button>
-                                    <button class="time-btn-outline">19:00</button>
-                                    <button class="time-btn-outline">19:30</button>
-                                    <button class="time-btn-outline">20:00</button>
-                                    <button class="time-btn-outline">20:30</button>
-                                    <button class="time-btn-outline">21:00</button>
-                                    <button class="time-btn-outline">21:30</button>
-                                    <button class="time-btn-outline">22:00</button>
-                                    <button class="time-btn-outline" style="grid-column: 1 / 3;">22:30</button>
-                                    <button class="time-btn-outline">23:00</button>
-                                </div>
-                                <div class="timeslot-footer-note">
-                                    Veuillez sélectionner une date pour voir les disponibilités.
-                                </div>
+                            <!-- Success state (replaced by ticket modal) -->
+                            <div class="form-success text-center" id="form-success" style="display:none">
+                                <div class="glow-text title mb-3">✓</div>
+                                <h3>Reservation Confirmed</h3>
+                                <p class="mt-2">Your table is reserved. Check your email for details.</p>
                             </div>
-                        </div>
+                        </form>
                     </div>
-
-                    <div class="res-card res-right-panel" style="position: relative; overflow: hidden;">
-                        <div style="position: absolute; top: -50px; right: -50px; width: 150px; height: 150px; background: var(--clr-accent); filter: blur(80px); opacity: 0.1; border-radius: 50%;"></div>
-                        
-                        <h2 style="position: relative; z-index: 1;">Ma Réservation</h2>
-                        <div class="summary-list" style="position: relative; z-index: 1;">
-                            
-                            <div class="summary-item">
-                                <div class="summary-icon">
-                                    <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
-                                </div>
-                                <div class="summary-details">
-                                    <span class="summary-label">Date</span>
-                                    <span class="summary-value">Non sélectionnée</span>
-                                </div>
-                            </div>
-
-                            <div class="summary-item">
-                                <div class="summary-icon">
-                                    <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
-                                </div>
-                                <div class="summary-details">
-                                    <span class="summary-label">Heure</span>
-                                    <span class="summary-value" style="color: var(--clr-text-muted);">--:--</span>
-                                </div>
-                            </div>
-
-                            <div class="summary-item">
-                                <div class="summary-icon">
-                                    <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
-                                </div>
-                                <div class="summary-details">
-                                    <span class="summary-label">Invités</span>
-                                    <span class="summary-value">2 Personnes</span>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="summary-note" style="position: relative; z-index: 1;">
-                            <strong>Note:</strong> Votre table sera réservée pendant 1h30. Merci d'arriver à l'heure.
-                        </div>
-                    </div>
-
                 </div>
             </div>
         </section>
 
+        <!-- ABOUT -->
         <section id="about" class="page-view">
             <header class="page-header dark-bg">
-                <h1 class="title reveal-on-scroll glow-text">The Architect</h1>
+                <h1 class="title reveal-on-scroll glow-text">Our Philosophy</h1>
             </header>
             <section class="section-padding container">
                 <div class="grid-2 align-center">
                     <div class="editorial-image reveal-on-scroll relative-glow">
-                        <img src="https://images.unsplash.com/photo-1577219491135-ce391730fb2c?q=80&w=1677&auto=format&fit=crop" alt="Executive Chef" loading="lazy" style="filter: grayscale(100%);">
+                        <img src="https://images.unsplash.com/photo-1583394838336-acd977736f90?q=80&w=1584&auto=format&fit=crop" alt="Executive Chef" loading="lazy">
                     </div>
                     <div class="editorial-text reveal-on-scroll delay-1">
-                        <h2 class="section-title">Chef Laurent Dubois</h2>
-                        <p style="color: var(--clr-text-muted); line-height: 1.8;">Dubois operates on a singular frequency: reduction. By systematically eliminating the unnecessary, he exposes the structural integrity of flavor. His tenure in Copenhagen and Kyoto fundamentally shifted his approach from cooking to curation.</p>
-                        <p style="color: var(--clr-text-muted); line-height: 1.8;">Vérité is his laboratory. A space devoid of distraction, engineered solely for the consumption of absolute truth.</p>
+                        <h2 class="section-title">Chef Julian Vane</h2>
+                        <p>With over two decades in the finest kitchens across Paris and Tokyo, Chef Vane brings a philosophy rooted in respect. Respect for the farmer, respect for the ingredient, and respect for the guest.</p>
+                        <p>Aurelia was born from a desire to strip away the pretension of fine dining while elevating the core experience.</p>
                     </div>
                 </div>
             </section>
         </section>
 
+        <!-- GALLERY -->
         <section id="gallery" class="page-view">
             <header class="page-header">
-                <h1 class="title reveal-on-scroll glow-text">Archive</h1>
+                <h1 class="title reveal-on-scroll glow-text">Gallery</h1>
             </header>
             <div class="container section-padding">
                 <div class="masonry-grid reveal-on-scroll delay-1" id="public-gallery-grid">
-                    <div class="masonry-item relative-glow"><img src="https://images.unsplash.com/photo-1544025162-83b63cc33454?q=80&w=1740&auto=format&fit=crop" alt="Gallery 1" loading="lazy" style="filter: grayscale(80%); transition: filter 0.3s;"><style>.masonry-item:hover img { filter: grayscale(0%); }</style></div>
-                    <div class="masonry-item relative-glow"><img src="https://images.unsplash.com/photo-1599813959371-332eb1e42b26?q=80&w=1740&auto=format&fit=crop" alt="Gallery 2" loading="lazy" style="filter: grayscale(80%);"></div>
-                    <div class="masonry-item relative-glow"><img src="https://images.unsplash.com/photo-1588166524941-3bf61a9c41db?q=80&w=1584&auto=format&fit=crop" alt="Gallery 3" loading="lazy" style="filter: grayscale(80%);"></div>
-                    <div class="masonry-item relative-glow"><img src="https://images.unsplash.com/photo-1514933651103-005eec06c04b?q=80&w=2074&auto=format&fit=crop" alt="Gallery 4" loading="lazy" style="filter: grayscale(80%);"></div>
-                    <div class="masonry-item relative-glow"><img src="https://images.unsplash.com/photo-1504670073073-6123e39e0754?q=80&w=1740&auto=format&fit=crop" alt="Gallery 5" loading="lazy" style="filter: grayscale(80%);"></div>
-                    <div class="masonry-item relative-glow"><img src="https://images.unsplash.com/photo-1577219491135-ce391730fb2c?q=80&w=1677&auto=format&fit=crop" alt="Gallery 6" loading="lazy" style="filter: grayscale(80%);"></div>
+                    <!-- Populated by api.loadGallery() or falls back to static below -->
+                    <div class="masonry-item relative-glow"><img src="https://images.unsplash.com/photo-1550966871-3ed3cdb5ed0c?q=80&w=2070&auto=format&fit=crop" alt="Gallery 1" loading="lazy"></div>
+                    <div class="masonry-item relative-glow"><img src="https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?q=80&w=2070&auto=format&fit=crop" alt="Gallery 2" loading="lazy"></div>
+                    <div class="masonry-item relative-glow"><img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?q=80&w=2070&auto=format&fit=crop" alt="Gallery 3" loading="lazy"></div>
+                    <div class="masonry-item relative-glow"><img src="https://images.unsplash.com/photo-1544148103-0773bf10d330?q=80&w=1740&auto=format&fit=crop" alt="Gallery 4" loading="lazy"></div>
+                    <div class="masonry-item relative-glow"><img src="https://images.unsplash.com/photo-1600891964092-4316c288032e?q=80&w=1740&auto=format&fit=crop" alt="Gallery 5" loading="lazy"></div>
+                    <div class="masonry-item relative-glow"><img src="https://images.unsplash.com/photo-1583394838336-acd977736f90?q=80&w=1584&auto=format&fit=crop" alt="Gallery 6" loading="lazy"></div>
                 </div>
             </div>
         </section>
 
+        <!-- CONTACT -->
         <section id="contact" class="page-view">
             <header class="page-header dark-bg">
-                <h1 class="title reveal-on-scroll glow-text">Coordinates</h1>
+                <h1 class="title reveal-on-scroll glow-text">Contact</h1>
             </header>
             <div class="grid-2">
-                <div class="map-placeholder glass-panel" style="border-right: none;">
-                    <img src="https://images.unsplash.com/photo-1524661135-423995f22d0b?q=80&w=1748&auto=format&fit=crop" alt="Location Map" style="width:100%;height:100%;object-fit:cover;filter:grayscale(100%) contrast(1.5) opacity(0.4);">
-                    <div class="map-overlay" style="color: white; font-weight: 500; font-family: var(--font-heading); letter-spacing: 0.1em;">VÉRITÉ</div>
+                <div class="map-placeholder glass-panel">
+                    <img src="https://images.unsplash.com/photo-1524661135-423995f22d0b?q=80&w=1748&auto=format&fit=crop" alt="Location" style="width:100%;height:100%;object-fit:cover;filter:grayscale(100%) contrast(1.2) opacity(0.6);">
+                    <div class="map-overlay">AURELIA</div>
                 </div>
-                <div class="contact-info section-padding reveal-on-scroll" style="background: var(--clr-bg-surface);">
-                    <h2 class="section-title">Direct Line</h2>
-                    <div class="info-block mt-4">
-                        <h4 style="color: var(--clr-text-muted); font-size: 0.8rem; text-transform: uppercase;">Location</h4>
-                        <p>128 Onyx Street,<br>Financial District, NY 10001</p>
-                    </div>
-                    <div class="info-block mt-3">
-                        <h4 style="color: var(--clr-text-muted); font-size: 0.8rem; text-transform: uppercase;">Operations</h4>
-                        <p>Wednesday – Sunday: 18:00 – 23:00<br>Monday & Tuesday: Dark</p>
-                    </div>
-                    <div class="info-block mt-3">
-                        <h4 style="color: var(--clr-text-muted); font-size: 0.8rem; text-transform: uppercase;">Inquiries</h4>
-                        <p>+1 (212) 555-0199<br>desk@verite-restaurant.com</p>
-                    </div>
+                <div class="contact-info section-padding reveal-on-scroll">
+                    <h2 class="section-title">Get in Touch</h2>
+                    <div class="info-block mt-4"><h4>Address</h4><p>128 High-End Avenue,<br>Culinary District, NY 10001</p></div>
+                    <div class="info-block mt-3"><h4>Hours</h4><p>Tuesday – Sunday: 5:30 PM – 11:00 PM<br>Monday: Closed</p></div>
+                    <div class="info-block mt-3"><h4>Contact</h4><p>+1 (212) 555-0199<br>hello@aurelia.com</p></div>
                 </div>
             </div>
         </section>
 
     </main>
 
+    <!-- ── RESERVATION TICKET MODAL ── -->
     <div id="ticket-modal" style="display:none">
-        <div class="ticket-backdrop" style="background: rgba(0,0,0,0.9); backdrop-filter: blur(5px);"></div>
+        <div class="ticket-backdrop"></div>
         <div class="ticket-container">
-            <div class="ticket-card glass-panel" style="background: #111; border: 1px solid rgba(255,255,255,0.1);">
+            <div class="ticket-card glass-panel">
                 <div class="ticket-header">
-                    <span class="ticket-logo" style="font-family: var(--font-heading); letter-spacing: 0.1em;">VÉRITÉ</span>
-                    <span class="ticket-label" style="color: var(--clr-accent);">Access Granted</span>
+                    <span class="ticket-logo">AURELIA</span>
+                    <span class="ticket-label">Confirmed Reservation</span>
                 </div>
                 <div class="ticket-divider">
-                    <div class="ticket-hole left" style="background: var(--clr-bg-dark);"></div>
-                    <div class="ticket-line" style="border-top: 1px dashed rgba(255,255,255,0.2);"></div>
-                    <div class="ticket-hole right" style="background: var(--clr-bg-dark);"></div>
+                    <div class="ticket-hole left"></div>
+                    <div class="ticket-line"></div>
+                    <div class="ticket-hole right"></div>
                 </div>
                 <div class="ticket-body">
                     <div class="ticket-row">
-                        <div class="ticket-field"><span class="ticket-field-label" style="color: var(--clr-text-muted);">Name</span><span class="ticket-field-value" id="t-name" style="color: white;">—</span></div>
-                        <div class="ticket-field"><span class="ticket-field-label" style="color: var(--clr-text-muted);">ID Code</span><span class="ticket-field-value ticket-id" id="t-id" style="color: white; font-family: monospace;">—</span></div>
+                        <div class="ticket-field"><span class="ticket-field-label">Name</span><span class="ticket-field-value" id="t-name">—</span></div>
+                        <div class="ticket-field"><span class="ticket-field-label">Reservation ID</span><span class="ticket-field-value ticket-id" id="t-id">—</span></div>
                     </div>
                     <div class="ticket-row">
-                        <div class="ticket-field"><span class="ticket-field-label" style="color: var(--clr-text-muted);">Date</span><span class="ticket-field-value" id="t-date" style="color: white;">—</span></div>
-                        <div class="ticket-field"><span class="ticket-field-label" style="color: var(--clr-text-muted);">Time Protocol</span><span class="ticket-field-value" id="t-time" style="color: white;">—</span></div>
+                        <div class="ticket-field"><span class="ticket-field-label">Date</span><span class="ticket-field-value" id="t-date">—</span></div>
+                        <div class="ticket-field"><span class="ticket-field-label">Time</span><span class="ticket-field-value" id="t-time">—</span></div>
                     </div>
                     <div class="ticket-row">
-                        <div class="ticket-field"><span class="ticket-field-label" style="color: var(--clr-text-muted);">Guests</span><span class="ticket-field-value" id="t-guests" style="color: white;">—</span></div>
-                        <div class="ticket-field"><span class="ticket-field-label" style="color: var(--clr-text-muted);">Zone</span><span class="ticket-field-value" id="t-exp" style="color: white;">—</span></div>
+                        <div class="ticket-field"><span class="ticket-field-label">Guests</span><span class="ticket-field-value" id="t-guests">—</span></div>
+                        <div class="ticket-field"><span class="ticket-field-label">Experience</span><span class="ticket-field-value" id="t-exp">—</span></div>
                     </div>
                 </div>
                 <div class="ticket-footer">
-                    <p style="color: var(--clr-text-muted); font-size: 0.8rem;">Presentation of this digital asset is required for entry.</p>
-                    <button class="btn-primary ticket-close-btn" id="ticket-close-btn" style="width: 100%; margin-top: 1rem; padding: 0.8rem;">Acknowledge</button>
+                    <p>Please present this ticket on arrival. We look forward to welcoming you.</p>
+                    <button class="btn-primary ticket-close-btn" id="ticket-close-btn">Done</button>
                 </div>
             </div>
         </div>
     </div>
 
-    <footer class="site-footer glass-panel" style="background: #050505; border-top: 1px solid rgba(255,255,255,0.05); margin-top: 4rem;">
+    <footer class="site-footer glass-panel">
         <div class="container grid-3">
             <div class="footer-brand">
-                <h2 class="glow-text" style="font-size: 1.5rem; letter-spacing: 0.1em;">VÉRITÉ</h2>
-                <p style="color: var(--clr-text-muted); font-size: 0.9rem;">Taste, Distilled.</p>
+                <h2 class="glow-text">AURELIA</h2>
+                <p>A Michelin-Starred Experience.</p>
             </div>
             <div class="footer-links">
-                <h4 style="color: white;">Index</h4>
-                <a href="#home"         class="route-link" style="color: var(--clr-text-muted);">Home</a>
-                <a href="#menu"         class="route-link" style="color: var(--clr-text-muted);">Menu</a>
-                <a href="#reservations" class="route-link" style="color: var(--clr-text-muted);">Access</a>
+                <h4>Navigation</h4>
+                <a href="#home"         class="route-link">Home</a>
+                <a href="#menu"         class="route-link">Menu</a>
+                <a href="#reservations" class="route-link">Reservations</a>
             </div>
             <div class="footer-newsletter">
-                <h4 style="color: white;">Intel</h4>
-                <p style="color: var(--clr-text-muted); font-size: 0.9rem;">Receive private access and seasonal dossier updates.</p>
-                <form class="newsletter-form" style="border-bottom: 1px solid rgba(255,255,255,0.2); padding-bottom: 0.5rem; display: flex;">
-                    <input type="email" placeholder="Email Address" style="background: transparent; border: none; color: white; outline: none; flex-grow: 1;">
-                    <button type="submit" style="background: transparent; border: none; color: var(--clr-accent); cursor: pointer;">→</button>
+                <h4>Newsletter</h4>
+                <p>Exclusive invites and seasonal updates.</p>
+                <form class="newsletter-form">
+                    <input type="email" placeholder="Email Address">
+                    <button type="submit">→</button>
                 </form>
             </div>
         </div>
-        <div class="footer-bottom container" style="border-top: 1px solid rgba(255,255,255,0.05); margin-top: 2rem; padding-top: 1.5rem;">
-            <p style="color: var(--clr-text-muted); font-size: 0.8rem;">&copy; 2026 Vérité. All rights reserved.</p>
-            <p><a href="admin.html" style="color:var(--clr-text-muted);opacity:0.2; font-size: 0.8rem;">System Admin</a></p>
+        <div class="footer-bottom container">
+            <p>&copy; 2026 Aurelia Fine Dining. All rights reserved.</p>
+            <p><a href="admin.html" style="color:var(--clr-text-muted);opacity:0.4">Admin</a></p>
         </div>
     </footer>
 
     <script>
+      // Dismiss loader after 1800ms
       setTimeout(function() {
         document.body.classList.remove('loading');
         document.body.classList.add('loaded');
-      }, 1600);
+      }, 1800);
 
+      // Set date constraints for reservation form
       document.addEventListener('DOMContentLoaded', function() {
         var dateInput = document.getElementById('res-date');
         if (dateInput) {
           var today   = new Date();
           var maxDate = new Date(today);
-          maxDate.setDate(maxDate.getDate() + 30); 
+          maxDate.setDate(maxDate.getDate() + 60);
           dateInput.min = today.toISOString().split('T')[0];
           dateInput.max = maxDate.toISOString().split('T')[0];
         }
       });
 
       window.__ENV = {
-        supabaseUrl:         '',
-        supabaseAnonKey:     '',
+        supabaseUrl:             '',
+        supabaseAnonKey:         '',
         cloudinaryCloudName:     '',
         cloudinaryUploadPreset:  '',
         googleReviewUrl:         '',
