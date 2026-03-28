@@ -11,22 +11,22 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&family=Manrope:wght@300;400;500;600&display=swap" rel="stylesheet">
 
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌿</text></svg>">
 
     <style>
         :root {
-            /* Oasis Noir Theme Colors */
-            --clr-bg-dark: #040906; /* Deep Midnight Green/Black */
-            --clr-bg-surface: #0a140d; /* Slightly lighter surface */
-            --clr-text-main: #e8f4ec; /* Soft minty white */
-            --clr-text-muted: #7a9c85; /* Muted sage */
-            --clr-accent: #00ff88; /* Neon Emerald Oasis */
-            --clr-accent-glow: rgba(0, 255, 136, 0.25);
+            /* Refined Oasis Noir Theme Colors */
+            --clr-bg-dark: #050806; /* Much deeper, almost pure black with a hint of green */
+            --clr-bg-surface: #0a110d; /* Subtle elevation color */
+            --clr-text-main: #f0f5f2; /* Crisper white for better readability */
+            --clr-text-muted: #8ba394; /* Elegant muted sage */
+            --clr-accent: #00E57A; /* Refined emerald, slightly less harsh than pure #00ff88 */
+            --clr-accent-glow: rgba(0, 229, 122, 0.2);
             
-            --font-heading: 'Playfair Display', serif;
-            --font-body: 'Inter', sans-serif;
+            --font-heading: 'Cormorant Garamond', serif;
+            --font-body: 'Manrope', sans-serif;
         }
 
         body {
@@ -36,12 +36,13 @@
             margin: 0;
             padding: 0;
             overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
         }
 
         /* Utility & Typography */
         h1, h2, h3, .title, .section-title, .nav-logo {
             font-family: var(--font-heading);
-            letter-spacing: -0.02em;
+            font-weight: 600;
         }
 
         a { text-decoration: none; color: inherit; }
@@ -52,58 +53,59 @@
             padding: 0 2rem;
         }
 
-        .section-padding { padding: 5rem 0; }
-        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
-        .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; }
+        .section-padding { padding: 6rem 0; }
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; }
         .align-center { align-items: center; }
 
-        .glow-text {
+        .text-accent {
             color: var(--clr-accent);
-            text-shadow: 0 0 20px var(--clr-accent-glow);
         }
 
         /* Buttons */
         .btn-primary {
-            background-color: var(--clr-text-main);
+            background-color: var(--clr-accent);
             color: var(--clr-bg-dark);
-            border: none;
-            padding: 0.8rem 1.5rem;
+            border: 1px solid var(--clr-accent);
+            padding: 1rem 2rem;
             border-radius: 4px;
             font-weight: 600;
+            font-family: var(--font-body);
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            font-size: 0.85rem;
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         .btn-primary:hover {
-            background-color: var(--clr-accent);
-            box-shadow: 0 0 15px var(--clr-accent-glow);
-            color: var(--clr-bg-dark);
+            background-color: transparent;
+            color: var(--clr-accent);
+            box-shadow: 0 0 20px var(--clr-accent-glow);
         }
 
         .btn-secondary {
             border: 1px solid var(--clr-text-muted);
             color: var(--clr-text-main);
-            padding: 0.8rem 1.5rem;
+            padding: 1rem 2rem;
             border-radius: 4px;
-            transition: all 0.3s ease;
+            font-weight: 500;
+            font-family: var(--font-body);
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            transition: all 0.4s ease;
         }
         
         .btn-secondary:hover {
-            border-color: var(--clr-accent);
-            color: var(--clr-accent);
+            border-color: var(--clr-text-main);
+            background: rgba(255,255,255,0.05);
         }
 
-        /* Glass & Ambient */
-        .glass-panel {
-            background: rgba(10, 20, 13, 0.6);
-            backdrop-filter: blur(12px);
-            border: 1px solid rgba(0, 255, 136, 0.05);
-        }
-        
+        /* Ambient */
         .ambient-background {
             position: fixed;
             top: 0; left: 0; right: 0; bottom: 0;
-            background: radial-gradient(circle at 50% 0%, #0a140d 0%, #040906 70%);
+            background: radial-gradient(circle at 50% 0%, #0a110d 0%, #050806 80%);
             z-index: -1;
         }
 
@@ -112,10 +114,8 @@
             position: fixed;
             top: 0; width: 100%;
             padding: 1.5rem 0;
-            background: rgba(4, 9, 6, 0.8);
-            backdrop-filter: blur(10px);
+            background: linear-gradient(to bottom, rgba(5,8,6,0.95), rgba(5,8,6,0));
             z-index: 100;
-            border-bottom: 1px solid rgba(0, 255, 136, 0.1);
         }
         .nav-container {
             display: flex;
@@ -125,22 +125,56 @@
             margin: 0 auto;
             padding: 0 2rem;
         }
-        .nav-links { display: flex; gap: 2rem; }
-        .nav-links a { font-size: 0.9rem; font-weight: 500; transition: color 0.3s; }
-        .nav-links a:hover { color: var(--clr-accent); }
+        .nav-logo { font-size: 1.5rem; letter-spacing: 0.15em; color: var(--clr-text-main); }
+        .nav-links { display: flex; gap: 2.5rem; }
+        .nav-links a { font-size: 0.85rem; font-weight: 500; text-transform: uppercase; letter-spacing: 0.1em; transition: color 0.3s; color: var(--clr-text-muted); }
+        .nav-links a:hover { color: var(--clr-text-main); }
 
-        /* Hero */
-        .hero { position: relative; height: 100vh; display: flex; align-items: center; justify-content: center; text-align: center; }
-        .hero-bg { position: absolute; inset: 0; z-index: -1; overflow: hidden; }
-        .hero-bg img { width: 100%; height: 100%; object-fit: cover; opacity: 0.4; filter: grayscale(80%) sepia(20%) hue-rotate(90deg); }
+        /* HERO SECTION REFINED */
+        .hero { 
+            position: relative; 
+            height: 100vh; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            text-align: center; 
+        }
         
-        /* Cards */
-        .card { border-radius: 8px; overflow: hidden; transition: transform 0.3s; }
-        .card:hover { transform: translateY(-5px); border-color: var(--clr-accent) !important; }
-        .card-img img { width: 100%; height: 250px; object-fit: cover; }
-        .card-content { padding: 1.5rem; }
+        .hero-bg { 
+            position: absolute; 
+            inset: 0; 
+            z-index: -1; 
+        }
+        
+        /* Dark gradient overlay ensures perfect text legibility without harsh filters */
+        .hero-bg::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to bottom, rgba(5,8,6,0.4) 0%, rgba(5,8,6,0.8) 60%, var(--clr-bg-dark) 100%);
+        }
 
-        /* --- NEW RESERVATION UI SCOPED STYLES --- */
+        .hero-bg img { 
+            width: 100%; 
+            height: 100%; 
+            object-fit: cover; 
+            opacity: 0.6;
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            padding: 0 2rem;
+        }
+
+        .hero-title {
+            font-size: clamp(4rem, 10vw, 8rem);
+            line-height: 0.9;
+            margin: 1rem 0;
+            font-weight: 400;
+        }
+
+        /* RESERVATION UI */
         .res-ui-wrapper {
             display: flex;
             flex-direction: column;
@@ -154,12 +188,11 @@
         }
 
         .res-card {
-            background: rgba(10, 20, 13, 0.7);
-            backdrop-filter: blur(16px);
-            border: 1px solid rgba(0, 255, 136, 0.1);
-            border-radius: 16px;
-            padding: 2.5rem;
-            box-shadow: 0 15px 50px rgba(0,0,0,0.6);
+            background: rgba(10, 17, 13, 0.5);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 1px; /* Sharper edges for luxury feel */
+            padding: 3rem;
         }
 
         .res-left-panel { flex: 1.8; }
@@ -167,7 +200,7 @@
             flex: 1;
             position: sticky;
             top: 100px;
-            border-top: 3px solid var(--clr-accent);
+            background: linear-gradient(145deg, rgba(10, 17, 13, 0.8), rgba(5, 8, 6, 0.9));
         }
 
         .res-header {
@@ -175,25 +208,24 @@
             align-items: center;
             gap: 1rem;
             margin-bottom: 2.5rem;
-            padding-bottom: 1rem;
+            padding-bottom: 1.5rem;
             border-bottom: 1px solid rgba(255,255,255,0.05);
         }
 
         .step-circle {
-            width: 35px;
-            height: 35px;
-            border-radius: 50%;
-            background: var(--clr-accent);
+            width: 30px;
+            height: 30px;
+            background: var(--clr-text-main);
             color: var(--clr-bg-dark);
             display: flex;
             align-items: center;
             justify-content: center;
-            font-weight: 700;
-            font-size: 1rem;
-            box-shadow: 0 0 15px var(--clr-accent-glow);
+            font-weight: 600;
+            font-size: 0.9rem;
+            font-family: var(--font-body);
         }
 
-        .res-header h2 { font-size: 1.8rem; margin: 0; }
+        .res-header h2 { font-size: 2rem; margin: 0; font-weight: 400; }
 
         .res-interactive-area {
             display: grid;
@@ -206,37 +238,30 @@
         }
 
         /* Calendar */
-        .calendar-wrapper {
-            background: rgba(0,0,0,0.3);
-            border-radius: 12px;
-            padding: 1.5rem;
-            border: 1px solid rgba(255, 255, 255, 0.03);
-        }
-
         .calendar-nav {
             display: flex;
             justify-content: space-between;
             align-items: center;
             margin-bottom: 1.5rem;
-            font-weight: 600;
+            font-weight: 500;
             color: var(--clr-text-main);
             text-transform: uppercase;
-            letter-spacing: 0.05em;
+            letter-spacing: 0.1em;
+            font-size: 0.9rem;
         }
 
         .calendar-nav button {
-            background: rgba(255,255,255,0.05);
-            border: none;
+            background: transparent;
+            border: 1px solid rgba(255,255,255,0.1);
             color: var(--clr-text-main);
-            width: 30px; height: 30px;
-            border-radius: 4px;
+            width: 36px; height: 36px;
             cursor: pointer;
             transition: all 0.3s;
         }
 
         .calendar-nav button:hover {
-            background: var(--clr-accent);
-            color: var(--clr-bg-dark);
+            border-color: var(--clr-accent);
+            color: var(--clr-accent);
         }
 
         .calendar-grid {
@@ -250,7 +275,7 @@
             color: var(--clr-text-muted);
             font-size: 0.75rem;
             text-transform: uppercase;
-            margin-bottom: 0.5rem;
+            margin-bottom: 1rem;
             letter-spacing: 0.1em;
         }
 
@@ -261,18 +286,17 @@
             justify-content: center;
             font-size: 0.9rem;
             cursor: pointer;
-            border-radius: 50%;
             color: var(--clr-text-main);
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: all 0.3s ease;
+            border: 1px solid transparent;
         }
 
         .day-number.prev-month { color: #2a3a30; cursor: default; }
-        .day-number:not(.prev-month):hover { background: rgba(0, 255, 136, 0.1); color: var(--clr-accent); }
+        .day-number:not(.prev-month):hover { border-color: rgba(0, 229, 122, 0.3); color: var(--clr-accent); }
         .day-number.selected {
             background: var(--clr-accent);
             color: var(--clr-bg-dark);
             font-weight: 600;
-            box-shadow: 0 0 15px var(--clr-accent-glow);
         }
 
         /* Time Slots */
@@ -280,7 +304,7 @@
             font-size: 0.85rem;
             text-transform: uppercase;
             letter-spacing: 0.1em;
-            color: var(--clr-accent);
+            color: var(--clr-text-muted);
             margin-bottom: 1.5rem;
             font-family: var(--font-body);
         }
@@ -292,13 +316,12 @@
         }
 
         .time-btn-outline {
-            background: rgba(0,0,0,0.3);
-            border: 1px solid rgba(0, 255, 136, 0.2);
+            background: transparent;
+            border: 1px solid rgba(255, 255, 255, 0.1);
             color: var(--clr-text-main);
-            padding: 0.6rem 0;
-            border-radius: 6px;
+            padding: 0.8rem 0;
             font-size: 0.9rem;
-            font-weight: 500;
+            font-weight: 400;
             cursor: pointer;
             transition: all 0.3s;
             font-family: var(--font-body);
@@ -306,79 +329,60 @@
 
         .time-btn-outline:hover {
             border-color: var(--clr-accent);
-            background: rgba(0, 255, 136, 0.05);
             color: var(--clr-accent);
-            box-shadow: 0 0 10px var(--clr-accent-glow);
-            transform: translateY(-2px);
         }
 
         /* Right Panel Summary */
         .res-right-panel h2 {
             font-family: var(--font-heading);
-            font-size: 1.5rem;
-            margin-bottom: 2rem;
-            color: var(--clr-accent);
+            font-size: 1.8rem;
+            margin-bottom: 2.5rem;
+            font-weight: 400;
         }
 
         .summary-list {
             display: flex;
             flex-direction: column;
-            gap: 1.5rem;
+            gap: 1.8rem;
         }
 
         .summary-item {
             display: flex;
-            align-items: center;
+            align-items: flex-start;
             gap: 1.2rem;
-            padding-bottom: 1.5rem;
-            border-bottom: 1px solid rgba(255,255,255,0.05);
-        }
-        .summary-item:last-child { border-bottom: none; }
-
-        .summary-icon {
-            width: 45px;
-            height: 45px;
-            border-radius: 10px;
-            background: rgba(0, 255, 136, 0.05);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border: 1px solid rgba(0, 255, 136, 0.2);
-            color: var(--clr-accent);
-        }
-
-        .summary-icon svg {
-            width: 20px; height: 20px;
-            fill: none; stroke: currentColor;
-            stroke-width: 2; stroke-linecap: round; stroke-linejoin: round;
         }
 
         .summary-details {
             display: flex;
             flex-direction: column;
-            gap: 0.3rem;
+            gap: 0.4rem;
         }
 
         .summary-label {
             font-size: 0.75rem;
             color: var(--clr-text-muted);
             text-transform: uppercase;
-            letter-spacing: 0.1em;
+            letter-spacing: 0.15em;
         }
 
         .summary-value {
             font-size: 1.1rem;
             color: white;
-            font-weight: 500;
+            font-weight: 400;
         }
 
         .confirm-btn {
             width: 100%;
-            margin-top: 1.5rem;
-            padding: 1.2rem;
-            font-size: 1rem;
-            letter-spacing: 0.05em;
-            text-transform: uppercase;
+            margin-top: 3rem;
+            display: block;
+            text-align: center;
+        }
+        
+        .image-showcase {
+            width: 100%; 
+            height: 600px;
+            object-fit: cover;
+            filter: brightness(0.8) contrast(1.1);
         }
     </style>
 </head>
@@ -387,14 +391,13 @@
 
     <nav id="navbar">
         <div class="nav-container">
-            <a href="#home" class="nav-logo" style="letter-spacing: 0.1em; font-size: 1.2rem;">OASIS NOIR</a>
+            <a href="#home" class="nav-logo">OASIS NOIR</a>
             <div class="nav-links">
                 <a href="#home">Home</a>
                 <a href="#menu">Menu</a>
                 <a href="#about">Philosophy</a>
                 <a href="#reservations">Reservations</a>
             </div>
-            <a href="#reservations" class="btn-primary">Reserve</a>
         </div>
     </nav>
 
@@ -402,13 +405,13 @@
         <section id="home">
             <header class="hero">
                 <div class="hero-bg">
-                    <img src="https://images.unsplash.com/photo-1514933651103-005eec06c04b?q=80&w=2074&auto=format&fit=crop" alt="Oasis Noir Interior">
+                    <img src="https://images.unsplash.com/photo-1559339352-11d035aa65de?q=80&w=1974&auto=format&fit=crop" alt="Oasis Noir Atmosphere">
                 </div>
                 <div class="hero-content">
-                    <span style="text-transform: uppercase; letter-spacing: 0.15em; color: var(--clr-accent); font-size: 0.85rem; font-weight: 600;">A Culinary Mirage</span>
-                    <h1 class="title glow-text" style="font-size: clamp(4rem, 8vw, 7rem); line-height: 1.1; margin: 1rem 0;">Shadow &<br>Flavor.</h1>
-                    <p style="max-width: 450px; margin: 1.5rem auto; color: var(--clr-text-muted); font-size: 1.1rem;">Stripping away the superfluous to reveal the pure, unadulterated essence of modern gastronomy hidden in the dark.</p>
-                    <div style="margin-top: 2.5rem; display: flex; gap: 1rem; justify-content: center;">
+                    <span style="text-transform: uppercase; letter-spacing: 0.2em; color: var(--clr-text-muted); font-size: 0.85rem; font-weight: 500;">A Culinary Mirage</span>
+                    <h1 class="hero-title">Shadow & <br><span class="text-accent" style="font-style: italic;">Flavor.</span></h1>
+                    <p style="max-width: 500px; margin: 2rem auto; color: var(--clr-text-muted); font-size: 1.1rem; line-height: 1.6; font-weight: 300;">Stripping away the superfluous to reveal the pure, unadulterated essence of modern gastronomy hidden in the dark.</p>
+                    <div style="margin-top: 3rem; display: flex; gap: 1.5rem; justify-content: center;">
                         <a href="#reservations" class="btn-primary">Secure a Table</a>
                         <a href="#menu" class="btn-secondary">View the Index</a>
                     </div>
@@ -419,11 +422,11 @@
         <section class="section-padding">
             <div class="container grid-2 align-center">
                 <div>
-                    <h2 class="section-title glow-text" style="font-size: 2.5rem; margin-bottom: 1.5rem;">The Pursuit of Absolute Perfection.</h2>
-                    <p style="color: var(--clr-text-muted); line-height: 1.8; margin-bottom: 2rem;">We do not cook; we engineer flavor. At Oasis Noir, the line between culinary science and artistry is erased. Every element on the plate is subjected to rigorous refinement, ensuring that only truth remains.</p>
+                    <h2 class="section-title" style="font-size: 3rem; margin-bottom: 2rem; line-height: 1.1;">The Pursuit of Absolute <span class="text-accent" style="font-style: italic;">Perfection.</span></h2>
+                    <p style="color: var(--clr-text-muted); line-height: 1.8; margin-bottom: 2rem; font-size: 1.05rem; font-weight: 300;">We do not cook; we engineer flavor. At Oasis Noir, the line between culinary science and artistry is erased. Every element on the plate is subjected to rigorous refinement, ensuring that only truth remains.</p>
                 </div>
                 <div>
-                    <img src="https://images.unsplash.com/photo-1588166524941-3bf61a9c41db?q=80&w=1584&auto=format&fit=crop" alt="Minimalist Plating" style="width: 100%; border-radius: 8px; box-shadow: 0 20px 40px rgba(0,0,0,0.5); border: 1px solid rgba(0,255,136,0.1);">
+                    <img src="https://images.unsplash.com/photo-1534080564583-6be75777b70a?q=80&w=2070&auto=format&fit=crop" alt="Minimalist Plating" class="image-showcase">
                 </div>
             </div>
         </section>
@@ -497,7 +500,7 @@
                             </div>
 
                             <div class="timeslot-section">
-                                <h3>Available Slots</h3>
+                                <h3>Available Sequences</h3>
                                 <div class="timeslot-grid">
                                     <button class="time-btn-outline">18:00</button>
                                     <button class="time-btn-outline">18:30</button>
@@ -514,16 +517,10 @@
                     </div>
 
                     <div class="res-card res-right-panel">
-                        <div style="position: absolute; top: -50px; right: -50px; width: 150px; height: 150px; background: var(--clr-accent); filter: blur(90px); opacity: 0.15; border-radius: 50%; z-index: 0;"></div>
+                        <h2>Your Reservation</h2>
                         
-                        <h2 style="position: relative; z-index: 1;">Your Reservation</h2>
-                        
-                        <div class="summary-list" style="position: relative; z-index: 1;">
-                            
+                        <div class="summary-list">
                             <div class="summary-item">
-                                <div class="summary-icon">
-                                    <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
-                                </div>
                                 <div class="summary-details">
                                     <span class="summary-label">Date</span>
                                     <span class="summary-value">Saturday, March 28</span>
@@ -531,28 +528,21 @@
                             </div>
 
                             <div class="summary-item">
-                                <div class="summary-icon">
-                                    <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
-                                </div>
                                 <div class="summary-details">
                                     <span class="summary-label">Time</span>
-                                    <span class="summary-value" style="color: var(--clr-text-muted);">Not Selected</span>
+                                    <span class="summary-value" style="color: var(--clr-text-muted);">Awaiting Selection</span>
                                 </div>
                             </div>
 
                             <div class="summary-item">
-                                <div class="summary-icon">
-                                    <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
-                                </div>
                                 <div class="summary-details">
-                                    <span class="summary-label">Guests</span>
-                                    <span class="summary-value">2 People</span>
+                                    <span class="summary-label">Party Size</span>
+                                    <span class="summary-value">2 Guests</span>
                                 </div>
                             </div>
-
                         </div>
 
-                        <button class="btn-primary confirm-btn" style="position: relative; z-index: 1;">Complete Booking</button>
+                        <button class="btn-primary confirm-btn">Complete Booking</button>
                     </div>
                     
                 </div>
