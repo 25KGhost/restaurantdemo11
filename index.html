@@ -224,76 +224,410 @@
             </div>
         </section>
 
-        <section id="reservations" class="page-view">
-            <div class="grid-2 full-height">
-                <div class="reservation-image relative-glow">
-                    <img src="https://images.unsplash.com/photo-1578474846511-04ba529f0b88?q=80&w=2070&auto=format&fit=crop" alt="Minimal Table Setting" loading="lazy" style="filter: contrast(1.1) brightness(0.8);">
-                </div>
-                <div class="reservation-form-container section-padding glass-panel" style="background: var(--clr-bg-surface);">
-                    <div class="reveal-on-scroll">
-                        <h1 class="title glow-text" style="font-size: 3rem;">Access</h1>
-                        <p class="scarcity-text mb-4" style="color: var(--clr-text-muted); font-size: 0.9rem;">We operate at a strict 20-seat capacity per evening. Availability is highly constrained.</p>
+        <section id="reservations" class="page-view section-padding" style="background: var(--clr-bg-dark);">
+            <style>
+                /* Scoped styles for the new reservation UI */
+                .res-ui-wrapper {
+                    display: flex;
+                    flex-direction: column;
+                    gap: 2rem;
+                    max-width: 1000px;
+                    margin: 0 auto;
+                    font-family: var(--font-body);
+                }
 
-                        <form id="booking-form" class="booking-form">
-                            <input type="text" name="website" style="display:none" tabindex="-1" autocomplete="off">
+                @media (min-width: 900px) {
+                    .res-ui-wrapper {
+                        flex-direction: row;
+                        align-items: flex-start;
+                    }
+                }
 
-                            <div class="form-step active" id="step-1">
-                                <div class="form-row grid-2">
-                                    <div class="form-group">
-                                        <label style="color: var(--clr-text-muted); font-size: 0.8rem; text-transform: uppercase;">Date</label>
-                                        <input type="date" id="res-date" required class="custom-input" style="background: var(--clr-bg-dark); border-color: rgba(255,255,255,0.1); color: white;">
-                                    </div>
-                                    <div class="form-group">
-                                        <label style="color: var(--clr-text-muted); font-size: 0.8rem; text-transform: uppercase;">Party</label>
-                                        <select id="res-guests" class="custom-input" required style="background: var(--clr-bg-dark); border-color: rgba(255,255,255,0.1); color: white;">
-                                            <option value="" disabled selected>Select size</option>
-                                            <option value="1">1 Guest</option>
-                                            <option value="2">2 Guests</option>
-                                            <option value="3">3 Guests</option>
-                                            <option value="4">4 Guests</option>
-                                        </select>
-                                    </div>
+                .res-card {
+                    background: #111111; /* Matching the dark card bg */
+                    border: 1px solid rgba(255, 255, 255, 0.05);
+                    border-radius: 12px;
+                    padding: 2rem;
+                    box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+                }
+
+                .res-left-panel {
+                    flex: 1.8;
+                }
+
+                .res-right-panel {
+                    flex: 1;
+                    position: sticky;
+                    top: 100px;
+                }
+
+                /* Left Panel: Header */
+                .res-header {
+                    display: flex;
+                    align-items: center;
+                    gap: 1rem;
+                    margin-bottom: 2rem;
+                }
+
+                .step-circle {
+                    width: 30px;
+                    height: 30px;
+                    border-radius: 50%;
+                    background: white;
+                    color: black;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    font-weight: 600;
+                    font-size: 0.9rem;
+                }
+
+                .res-header h2 {
+                    font-family: var(--font-heading);
+                    font-size: 1.5rem;
+                    margin: 0;
+                }
+
+                /* Left Panel: Grid (Calendar + Times) */
+                .res-interactive-area {
+                    display: grid;
+                    grid-template-columns: 1fr;
+                    gap: 3rem;
+                }
+
+                @media (min-width: 600px) {
+                    .res-interactive-area {
+                        grid-template-columns: 1fr 1fr;
+                    }
+                }
+
+                /* Calendar Component */
+                .calendar-wrapper {
+                    background: #0a0a0a;
+                    border-radius: 8px;
+                    padding: 1.5rem;
+                    border: 1px solid rgba(255, 255, 255, 0.03);
+                }
+
+                .calendar-nav {
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    margin-bottom: 1.5rem;
+                    font-size: 0.9rem;
+                    font-weight: 500;
+                }
+
+                .calendar-nav button {
+                    background: transparent;
+                    border: none;
+                    color: var(--clr-text-muted);
+                    cursor: pointer;
+                    font-size: 1.2rem;
+                    transition: color 0.3s;
+                }
+
+                .calendar-nav button:hover { color: white; }
+
+                .calendar-grid {
+                    display: grid;
+                    grid-template-columns: repeat(7, 1fr);
+                    gap: 0.5rem;
+                    text-align: center;
+                }
+
+                .day-name {
+                    color: var(--clr-text-muted);
+                    font-size: 0.75rem;
+                    text-transform: uppercase;
+                    margin-bottom: 0.5rem;
+                }
+
+                .day-number {
+                    aspect-ratio: 1;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    font-size: 0.85rem;
+                    cursor: pointer;
+                    border-radius: 4px;
+                    color: var(--clr-text-main);
+                    transition: all 0.2s ease;
+                }
+
+                .day-number.prev-month { color: #333; cursor: default; }
+                .day-number:not(.prev-month):hover { background: rgba(255,255,255,0.1); }
+                .day-number.selected {
+                    background: rgba(255,255,255,0.15);
+                    font-weight: 600;
+                    border: 1px solid rgba(255,255,255,0.3);
+                }
+
+                /* Time Slots Component */
+                .timeslot-section h3 {
+                    font-size: 0.75rem;
+                    text-transform: uppercase;
+                    letter-spacing: 0.05em;
+                    color: var(--clr-text-muted);
+                    margin-bottom: 1rem;
+                    font-family: var(--font-body);
+                }
+
+                .timeslot-grid {
+                    display: grid;
+                    grid-template-columns: repeat(3, 1fr);
+                    gap: 0.5rem;
+                }
+
+                .time-btn-outline {
+                    background: transparent;
+                    border: 1px solid rgba(255,255,255,0.1);
+                    color: var(--clr-text-muted);
+                    padding: 0.5rem 0;
+                    border-radius: 4px;
+                    font-size: 0.85rem;
+                    cursor: pointer;
+                    transition: all 0.2s;
+                    font-family: var(--font-body);
+                }
+
+                .time-btn-outline:hover {
+                    border-color: rgba(255,255,255,0.3);
+                    color: white;
+                }
+
+                .timeslot-footer-note {
+                    font-size: 0.75rem;
+                    color: var(--clr-text-muted);
+                    margin-top: 1.5rem;
+                    font-style: italic;
+                    text-align: center;
+                }
+
+                /* Right Panel: Summary */
+                .res-right-panel h2 {
+                    font-family: var(--font-heading);
+                    font-size: 1.3rem;
+                    margin-bottom: 1.5rem;
+                    margin-top: 0;
+                }
+
+                .summary-list {
+                    display: flex;
+                    flex-direction: column;
+                    gap: 1.5rem;
+                }
+
+                .summary-item {
+                    display: flex;
+                    align-items: flex-start;
+                    gap: 1rem;
+                }
+
+                .summary-icon {
+                    width: 36px;
+                    height: 36px;
+                    border-radius: 50%;
+                    background: #1a1a1a;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    border: 1px solid rgba(255,255,255,0.05);
+                }
+
+                .summary-icon svg {
+                    width: 16px;
+                    height: 16px;
+                    fill: none;
+                    stroke: var(--clr-text-muted);
+                    stroke-width: 2;
+                    stroke-linecap: round;
+                    stroke-linejoin: round;
+                }
+
+                .summary-details {
+                    display: flex;
+                    flex-direction: column;
+                    gap: 0.25rem;
+                }
+
+                .summary-label {
+                    font-size: 0.7rem;
+                    color: var(--clr-accent);
+                    text-transform: uppercase;
+                    letter-spacing: 0.1em;
+                    font-weight: 600;
+                }
+
+                .summary-value {
+                    font-size: 0.95rem;
+                    color: white;
+                    font-weight: 500;
+                }
+
+                .summary-note {
+                    margin-top: 2rem;
+                    padding: 1rem;
+                    background: rgba(255,255,255,0.03);
+                    border-radius: 6px;
+                    font-size: 0.75rem;
+                    color: var(--clr-text-muted);
+                    line-height: 1.5;
+                    border-left: 2px solid rgba(255,255,255,0.1);
+                }
+            </style>
+
+            <div class="container reveal-on-scroll">
+                <div class="res-ui-wrapper">
+                    
+                    <div class="res-card res-left-panel">
+                        <div class="res-header">
+                            <div class="step-circle">1</div>
+                            <h2>Date et Heure</h2>
+                        </div>
+                        
+                        <div class="res-interactive-area">
+                            <div class="calendar-wrapper">
+                                <div class="calendar-nav">
+                                    <button>&lsaquo;</button>
+                                    <span>mars 2026</span>
+                                    <button>&rsaquo;</button>
                                 </div>
-                                <div class="form-group">
-                                    <label style="color: var(--clr-text-muted); font-size: 0.8rem; text-transform: uppercase;">Zone</label>
-                                    <select id="res-experience" class="custom-input" style="background: var(--clr-bg-dark); border-color: rgba(255,255,255,0.1); color: white;">
-                                        <option>The Main Floor</option>
-                                        <option>The Kitchen Counter</option>
-                                    </select>
+                                <div class="calendar-grid">
+                                    <div class="day-name">lu</div>
+                                    <div class="day-name">ma</div>
+                                    <div class="day-name">me</div>
+                                    <div class="day-name">je</div>
+                                    <div class="day-name">ve</div>
+                                    <div class="day-name">sa</div>
+                                    <div class="day-name">di</div>
+                                    
+                                    <div class="day-number prev-month">23</div>
+                                    <div class="day-number prev-month">24</div>
+                                    <div class="day-number prev-month">25</div>
+                                    <div class="day-number prev-month">26</div>
+                                    <div class="day-number prev-month">27</div>
+                                    <div class="day-number prev-month">28</div>
+                                    <div class="day-number">1</div>
+                                    
+                                    <div class="day-number">2</div>
+                                    <div class="day-number">3</div>
+                                    <div class="day-number">4</div>
+                                    <div class="day-number">5</div>
+                                    <div class="day-number">6</div>
+                                    <div class="day-number">7</div>
+                                    <div class="day-number">8</div>
+                                    
+                                    <div class="day-number">9</div>
+                                    <div class="day-number">10</div>
+                                    <div class="day-number">11</div>
+                                    <div class="day-number">12</div>
+                                    <div class="day-number">13</div>
+                                    <div class="day-number">14</div>
+                                    <div class="day-number">15</div>
+                                    
+                                    <div class="day-number">16</div>
+                                    <div class="day-number">17</div>
+                                    <div class="day-number">18</div>
+                                    <div class="day-number">19</div>
+                                    <div class="day-number">20</div>
+                                    <div class="day-number">21</div>
+                                    <div class="day-number">22</div>
+                                    
+                                    <div class="day-number">23</div>
+                                    <div class="day-number">24</div>
+                                    <div class="day-number">25</div>
+                                    <div class="day-number">26</div>
+                                    <div class="day-number">27</div>
+                                    <div class="day-number selected">28</div>
+                                    <div class="day-number">29</div>
+                                    
+                                    <div class="day-number">30</div>
+                                    <div class="day-number">31</div>
+                                    <div class="day-number prev-month">1</div>
+                                    <div class="day-number prev-month">2</div>
+                                    <div class="day-number prev-month">3</div>
+                                    <div class="day-number prev-month">4</div>
+                                    <div class="day-number prev-month">5</div>
                                 </div>
-                                <div class="form-group">
-                                    <label style="color: var(--clr-text-muted); font-size: 0.8rem; text-transform: uppercase;">Time Protocol</label>
-                                    <div class="time-slots" id="time-slots">
-                                        <button type="button" class="time-btn" data-time="18:00" style="border-color: rgba(255,255,255,0.2);">18:00</button>
-                                        <button type="button" class="time-btn active" data-time="19:30" style="background: white; color: black;">19:30</button>
-                                        <button type="button" class="time-btn" data-time="21:00" style="border-color: rgba(255,255,255,0.2);">21:00</button>
-                                    </div>
-                                </div>
-                                <p class="form-error" id="step1-error" style="color: #ff4444;"></p>
-                                <button type="button" class="btn-primary w-100 mt-3" id="next-step-btn" style="padding: 1rem;">Proceed</button>
                             </div>
 
-                            <div class="form-step" id="step-2" style="display:none">
-                                <div class="form-group">
-                                    <label style="color: var(--clr-text-muted); font-size: 0.8rem; text-transform: uppercase;">Identity</label>
-                                    <input type="text" id="res-name" placeholder="Full legal name" required class="custom-input" style="background: var(--clr-bg-dark); border-color: rgba(255,255,255,0.1); color: white;">
+                            <div class="timeslot-section">
+                                <h3>Créneaux Disponibles</h3>
+                                <div class="timeslot-grid">
+                                    <button class="time-btn-outline">12:00</button>
+                                    <button class="time-btn-outline">12:30</button>
+                                    <button class="time-btn-outline">13:00</button>
+                                    <button class="time-btn-outline">13:30</button>
+                                    <button class="time-btn-outline">14:00</button>
+                                    <button class="time-btn-outline">14:30</button>
+                                    <button class="time-btn-outline">15:00</button>
+                                    <button class="time-btn-outline">15:30</button>
+                                    <button class="time-btn-outline">16:00</button>
+                                    <button class="time-btn-outline">16:30</button>
+                                    <button class="time-btn-outline">17:00</button>
+                                    <button class="time-btn-outline">17:30</button>
+                                    <button class="time-btn-outline">18:00</button>
+                                    <button class="time-btn-outline">18:30</button>
+                                    <button class="time-btn-outline">19:00</button>
+                                    <button class="time-btn-outline">19:30</button>
+                                    <button class="time-btn-outline">20:00</button>
+                                    <button class="time-btn-outline">20:30</button>
+                                    <button class="time-btn-outline">21:00</button>
+                                    <button class="time-btn-outline">21:30</button>
+                                    <button class="time-btn-outline">22:00</button>
+                                    <button class="time-btn-outline" style="grid-column: 1 / 3;">22:30</button>
+                                    <button class="time-btn-outline">23:00</button>
                                 </div>
-                                <div class="form-group mt-2">
-                                    <label style="color: var(--clr-text-muted); font-size: 0.8rem; text-transform: uppercase;">Comms</label>
-                                    <input type="email" id="res-email" placeholder="Email address" required class="custom-input" style="background: var(--clr-bg-dark); border-color: rgba(255,255,255,0.1); color: white;">
-                                </div>
-                                <div class="form-group mt-2">
-                                    <label style="color: var(--clr-text-muted); font-size: 0.8rem; text-transform: uppercase;">Parameters (Allergies)</label>
-                                    <textarea id="res-notes" placeholder="Specify any dietary restrictions..." class="custom-input" rows="2" style="background: var(--clr-bg-dark); border-color: rgba(255,255,255,0.1); color: white;"></textarea>
-                                </div>
-                                <p class="form-error" id="step2-error" style="color: #ff4444;"></p>
-                                <div class="grid-2 mt-3">
-                                    <button type="button" class="btn-secondary" id="prev-step-btn" style="padding: 1rem;">Back</button>
-                                    <button type="submit" class="btn-primary" id="submit-btn" style="padding: 1rem;">Finalize</button>
+                                <div class="timeslot-footer-note">
+                                    Veuillez sélectionner une date pour voir les disponibilités.
                                 </div>
                             </div>
-                        </form>
+                        </div>
                     </div>
+
+                    <div class="res-card res-right-panel" style="position: relative; overflow: hidden;">
+                        <div style="position: absolute; top: -50px; right: -50px; width: 150px; height: 150px; background: var(--clr-accent); filter: blur(80px); opacity: 0.1; border-radius: 50%;"></div>
+                        
+                        <h2 style="position: relative; z-index: 1;">Ma Réservation</h2>
+                        <div class="summary-list" style="position: relative; z-index: 1;">
+                            
+                            <div class="summary-item">
+                                <div class="summary-icon">
+                                    <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+                                </div>
+                                <div class="summary-details">
+                                    <span class="summary-label">Date</span>
+                                    <span class="summary-value">Non sélectionnée</span>
+                                </div>
+                            </div>
+
+                            <div class="summary-item">
+                                <div class="summary-icon">
+                                    <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                                </div>
+                                <div class="summary-details">
+                                    <span class="summary-label">Heure</span>
+                                    <span class="summary-value" style="color: var(--clr-text-muted);">--:--</span>
+                                </div>
+                            </div>
+
+                            <div class="summary-item">
+                                <div class="summary-icon">
+                                    <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+                                </div>
+                                <div class="summary-details">
+                                    <span class="summary-label">Invités</span>
+                                    <span class="summary-value">2 Personnes</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="summary-note" style="position: relative; z-index: 1;">
+                            <strong>Note:</strong> Votre table sera réservée pendant 1h30. Merci d'arriver à l'heure.
+                        </div>
+                    </div>
+
                 </div>
             </div>
         </section>
@@ -434,15 +768,15 @@
         if (dateInput) {
           var today   = new Date();
           var maxDate = new Date(today);
-          maxDate.setDate(maxDate.getDate() + 30); // Tightened window to 30 days for exclusivity 
+          maxDate.setDate(maxDate.getDate() + 30); 
           dateInput.min = today.toISOString().split('T')[0];
           dateInput.max = maxDate.toISOString().split('T')[0];
         }
       });
 
       window.__ENV = {
-        supabaseUrl:             '',
-        supabaseAnonKey:         '',
+        supabaseUrl:         '',
+        supabaseAnonKey:     '',
         cloudinaryCloudName:     '',
         cloudinaryUploadPreset:  '',
         googleReviewUrl:         '',
