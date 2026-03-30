@@ -190,67 +190,98 @@
         </section>
 
         <!-- RESERVATIONS -->
+        
         <section id="reservations" class="page-view">
-            <div class="grid-2 full-height">
-                <div class="reservation-image relative-glow">
-                    <img src="https://images.unsplash.com/photo-1544148103-0773bf10d330?q=80&w=1740&auto=format&fit=crop" alt="Table Setting" loading="lazy">
+            <header class="page-header" style="height: 40vh; background: url('https://images.unsplash.com/photo-1544148103-0773bf10d330?q=80&w=1740&auto=format&fit=crop') center/cover; position: relative;">
+                <div style="position: absolute; inset: 0; background: rgba(5,5,7,0.85);"></div>
+                <div class="relative-glow" style="z-index: 1;">
+                    <h1 class="title glow-text" style="color: var(--clr-accent);">Reservation</h1>
+                    <p class="scarcity-text mt-2" style="color: var(--clr-text-muted); text-transform: none; letter-spacing: 0.05em; font-size: 1rem;">Reserve your table and live an exceptional gastronomic experience.</p>
                 </div>
-                <div class="reservation-form-container section-padding glass-panel">
-                    <div class="reveal-on-scroll">
-                        <h1 class="title glow-text">Reservations</h1>
-                        <p class="scarcity-text mb-4">Limited seating available. A refined experience awaits.</p>
+            </header>
 
+            <div class="container section-padding">
+                <div class="reservation-layout grid-2">
+                    
+                    <div class="reservation-main-panel glass-panel">
                         <form id="booking-form" class="booking-form">
-                            <!-- Honeypot -->
                             <input type="text" name="website" style="display:none" tabindex="-1" autocomplete="off">
 
-                            <!-- Step 1: Date, Guests, Time -->
                             <div class="form-step active" id="step-1">
-                                <div class="form-row grid-2">
-                                    <div class="form-group">
-                                        <label>Date</label>
-                                        <input type="date" id="res-date" required class="custom-input">
+                                <div class="step-header">
+                                    <span class="step-number">1</span>
+                                    <h2>Date and Time</h2>
+                                </div>
+
+                                <div class="datetime-picker-grid">
+                                    <div class="custom-calendar glass-panel">
+                                        <div class="calendar-header">
+                                            <button type="button" class="cal-nav">&lt;</button>
+                                            <span class="cal-month">March 2026</span>
+                                            <button type="button" class="cal-nav">&gt;</button>
+                                        </div>
+                                        <div class="calendar-weekdays">
+                                            <span>Mo</span><span>Tu</span><span>We</span><span>Th</span><span>Fr</span><span>Sa</span><span>Su</span>
+                                        </div>
+                                        <div class="calendar-days">
+                                            <span class="cal-day prev-month">23</span><span class="cal-day prev-month">24</span><span class="cal-day prev-month">25</span><span class="cal-day prev-month">26</span><span class="cal-day prev-month">27</span><span class="cal-day prev-month">28</span><span class="cal-day">1</span>
+                                            <span class="cal-day">2</span><span class="cal-day">3</span><span class="cal-day">4</span><span class="cal-day">5</span><span class="cal-day">6</span><span class="cal-day">7</span><span class="cal-day">8</span>
+                                            <span class="cal-day">9</span><span class="cal-day">10</span><span class="cal-day">11</span><span class="cal-day">12</span><span class="cal-day">13</span><span class="cal-day">14</span><span class="cal-day">15</span>
+                                            <span class="cal-day">16</span><span class="cal-day">17</span><span class="cal-day">18</span><span class="cal-day">19</span><span class="cal-day">20</span><span class="cal-day">21</span><span class="cal-day">22</span>
+                                            <span class="cal-day">23</span><span class="cal-day">24</span><span class="cal-day">25</span><span class="cal-day">26</span><span class="cal-day">27</span><span class="cal-day active">28</span><span class="cal-day">29</span>
+                                            <span class="cal-day">30</span><span class="cal-day">31</span><span class="cal-day prev-month">1</span><span class="cal-day prev-month">2</span><span class="cal-day prev-month">3</span><span class="cal-day prev-month">4</span><span class="cal-day prev-month">5</span>
+                                        </div>
+                                        <input type="date" id="res-date" required style="display:none;" value="2026-03-28">
                                     </div>
+
+                                    <div class="time-slots-container">
+                                        <h4 class="slot-title">Available Slots</h4>
+                                        <div class="time-slots" id="time-slots">
+                                            <button type="button" class="time-btn" data-time="12:00">12:00</button>
+                                            <button type="button" class="time-btn" data-time="12:30">12:30</button>
+                                            <button type="button" class="time-btn" data-time="13:00">13:00</button>
+                                            <button type="button" class="time-btn" data-time="19:30">19:30</button>
+                                            <button type="button" class="time-btn active" data-time="20:00">20:00</button>
+                                            <button type="button" class="time-btn" data-time="20:30">20:30</button>
+                                            <button type="button" class="time-btn" data-time="21:00">21:00</button>
+                                            <button type="button" class="time-btn" data-time="21:30">21:30</button>
+                                        </div>
+                                        <p class="slot-note">Please select a date to see availability.</p>
+                                    </div>
+                                </div>
+
+                                <div class="form-row grid-2 mt-4">
                                     <div class="form-group">
                                         <label>Guests</label>
                                         <select id="res-guests" class="custom-input" required>
-                                            <option value="" disabled selected>Select party size</option>
+                                            <option value="" disabled>Select party size</option>
                                             <option value="1">1 Person</option>
-                                            <option value="2">2 People</option>
+                                            <option value="2" selected>2 People</option>
                                             <option value="3">3 People</option>
                                             <option value="4">4 People</option>
                                             <option value="5">5 People</option>
                                             <option value="6">6 People</option>
-                                            <option value="7">7 People</option>
-                                            <option value="8">8+ People (Contact Us)</option>
                                         </select>
                                     </div>
-                                </div>
-                                <div class="form-group">
-                                    <label>Experience</label>
-                                    <select id="res-experience" class="custom-input">
-                                        <option>Main Dining Room</option>
-                                        <option>Chef's Counter (Tasting Only)</option>
-                                        <option>The Glass Room (Private)</option>
-                                    </select>
-                                </div>
-                                <div class="form-group">
-                                    <label>Select Time</label>
-                                    <div class="time-slots" id="time-slots">
-                                        <button type="button" class="time-btn" data-time="17:30">5:30 PM</button>
-                                        <button type="button" class="time-btn" data-time="18:00">6:00 PM</button>
-                                        <button type="button" class="time-btn active" data-time="19:30">7:30 PM</button>
-                                        <button type="button" class="time-btn" data-time="20:00">8:00 PM</button>
-                                        <button type="button" class="time-btn" data-time="21:30">9:30 PM</button>
+                                    <div class="form-group">
+                                        <label>Experience</label>
+                                        <select id="res-experience" class="custom-input">
+                                            <option>Main Dining Room</option>
+                                            <option>Chef's Counter (Tasting Only)</option>
+                                            <option>The Glass Room (Private)</option>
+                                        </select>
                                     </div>
                                 </div>
                                 <p class="form-error" id="step1-error"></p>
                                 <button type="button" class="btn-primary w-100 mt-3" id="next-step-btn">Continue</button>
                             </div>
 
-                            <!-- Step 2: Guest Details -->
                             <div class="form-step" id="step-2" style="display:none">
-                                <div class="form-group">
+                                <div class="step-header">
+                                    <span class="step-number">2</span>
+                                    <h2>Guest Details</h2>
+                                </div>
+                                <div class="form-group mt-3">
                                     <label>Full Name</label>
                                     <input type="text" id="res-name" placeholder="Your name" required class="custom-input">
                                 </div>
@@ -273,7 +304,6 @@
                                 </div>
                             </div>
 
-                            <!-- Success state (replaced by ticket modal) -->
                             <div class="form-success text-center" id="form-success" style="display:none">
                                 <div class="glow-text title mb-3">✓</div>
                                 <h3>Reservation Confirmed</h3>
@@ -281,10 +311,44 @@
                             </div>
                         </form>
                     </div>
+
+                    <div class="reservation-summary-wrapper">
+                        <div class="reservation-summary-panel glass-panel">
+                            <h3>My Reservation</h3>
+                            
+                            <div class="summary-item">
+                                <div class="summary-icon">🗓️</div>
+                                <div class="summary-details">
+                                    <span class="summary-label">Date</span>
+                                    <span class="summary-value" id="sum-date">March 28, 2026</span>
+                                </div>
+                            </div>
+
+                            <div class="summary-item">
+                                <div class="summary-icon">⏱️</div>
+                                <div class="summary-details">
+                                    <span class="summary-label">Time</span>
+                                    <span class="summary-value" id="sum-time">20:00</span>
+                                </div>
+                            </div>
+
+                            <div class="summary-item">
+                                <div class="summary-icon">👥</div>
+                                <div class="summary-details">
+                                    <span class="summary-label">Guests</span>
+                                    <span class="summary-value" id="sum-guests">2 People</span>
+                                </div>
+                            </div>
+
+                            <div class="summary-footer">
+                                <p><strong>Note:</strong> Your table will be reserved for 2h30. Please ensure you arrive on time.</p>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
             </div>
         </section>
-
         <!-- ABOUT -->
         <section id="about" class="page-view">
             <header class="page-header dark-bg">
